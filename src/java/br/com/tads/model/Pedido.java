@@ -1,0 +1,70 @@
+package br.com.tads.model;
+
+import br.com.tads.model.status.EmAnalise;
+import br.com.tads.model.status.Finalizado;
+import br.com.tads.model.status.StatusPedido;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pedido {
+    private int numero;
+    private Orcamento orcamento;
+    private StatusPedido statusPedido;
+    private LocalDateTime dataCriacao = LocalDateTime.now();
+    private List<Roupa> roupas = new ArrayList<>();
+
+
+    public Pedido() {
+        this.statusPedido = new EmAnalise();
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public Orcamento getOrcamento() {
+        return orcamento;
+    }
+
+    public void setOrcamento(Orcamento orcamento) {
+        this.orcamento = orcamento;
+    }
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public void aprovar(){
+        this.statusPedido.aprovar(this);
+    }
+
+    public void reprovar(){
+        this.statusPedido.reprovar(this);
+    }
+
+    public void finalizar(){
+        this.statusPedido.finalizar(this);
+    }
+
+    public void setStatusPedido(StatusPedido statusPedido){
+        this.statusPedido = statusPedido;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+
+    public boolean isFinalizado() {
+        return statusPedido instanceof Finalizado;
+    }
+}
