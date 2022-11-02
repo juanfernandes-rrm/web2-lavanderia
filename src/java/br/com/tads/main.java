@@ -1,6 +1,5 @@
 package br.com.tads;
 
-import br.com.tads.model.Orcamento;
 import br.com.tads.model.Pedido;
 
 public class main {
