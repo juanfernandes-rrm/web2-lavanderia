@@ -4,32 +4,19 @@
  */
 package br.com.tads.action;
 
-import br.com.tads.model.Cliente;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
  *
  * @author juann
  */
-public class Login implements Action {
+public class TesteFilter implements Action{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-
-
-        if(login != null) {
-            HttpSession session = request.getSession();
-            Cliente cliente = new Cliente(login, senha);
-            session.setAttribute("cliente", cliente);
-            return "redirect:controller?action=Home";
-        }else {
-            return "redirect:controller?action=LoginForm";
-        }    
+        return "forward:teste.jsp";
     }
     
 }

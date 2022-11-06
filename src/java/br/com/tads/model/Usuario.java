@@ -1,12 +1,10 @@
 package br.com.tads.model;
 
 public abstract class Usuario {
-    private String cpf;
-    private String nome;
-    private String email;
-    private Endereco Endereco;
-    private String telefone;
-    private String senha;
-
-
+    protected String cpf;
+    protected String nome;
+    protected String email;
+    protected Endereco Endereco;
+    protected String telefone;
+    protected String senha;
 }
