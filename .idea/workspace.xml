@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e65aa1e6-f377-4386-b50e-31c94325edab" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_automatic_build" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/.netbeans_update_resources" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/LoginServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/LoginServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/exceptions/DomainExcepction.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/exceptions/DomainExcepction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Endereco.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Endereco.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Funcionario.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Funcionario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Orcamento.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Orcamento.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Pedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Pedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Roupa.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Roupa.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/enums/RoupaEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/enums/RoupaEnum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Cancelado.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Cancelado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/EmAberto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/EmAberto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/EmAnalise.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/EmAnalise.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Finalizado.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Finalizado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Rejeitado.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/Rejeitado.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/StatusPedido.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/br/com/tads/model/status/StatusPedido.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lavanderia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lavanderia.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2H2QLY7Hbwk8b0RN2hBQo2hoTcx" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/juann/Documents/programming/jpa/loja",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e65aa1e6-f377-4386-b50e-31c94325edab" name="Changes" comment="" />
+      <created>1667426458693</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667426458693</updated>
+      <workItem from="1667426461033" duration="106000" />
+      <workItem from="1667480791189" duration="407000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
