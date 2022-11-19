@@ -20,7 +20,7 @@ import java.io.IOException;
 public class Home implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:home.jsp";
+        return "forward:homeCliente.jsp";
     }
 
 }

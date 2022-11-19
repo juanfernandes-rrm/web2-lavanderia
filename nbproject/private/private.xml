@@ -4,9 +4,27 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/main.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Login.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/StatusPedido.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Home.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/LoginForm.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Endereco.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/home.jsp</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/cadastro.jsp</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/Rejeitado.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/controller/Controller.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/TesteFilter.java</file>
             <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/Cancelado.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/LoginServlet.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Action.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/resources/css/bootstrap.css</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/controller/AutorizacaoFilter.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Cliente.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Funcionario.java</file>
             <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/index.html</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Usuario.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/EmAnalise.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/EmAberto.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/login.jsp</file>
         </group>
     </open-files>
 </project-private>

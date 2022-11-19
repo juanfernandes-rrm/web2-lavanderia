@@ -33,10 +33,10 @@ public class AutorizacaoFilter extends HttpFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		
 		HttpSession session = request.getSession();
-		Cliente cliente = (Cliente) session.getAttribute("cliente");
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		String action = request.getParameter("action");
 		
-		boolean usuarioLogado = (cliente!=null);
+		boolean usuarioLogado = (usuario!=null);
 		boolean actionProtegida = !(action.equals("LoginForm") || action.equals("Login"));
 		
 		if(!usuarioLogado && actionProtegida) {

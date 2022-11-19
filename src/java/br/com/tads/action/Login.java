@@ -5,6 +5,7 @@
 package br.com.tads.action;
 
 import br.com.tads.model.Cliente;
+import br.com.tads.model.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,12 +21,14 @@ public class Login implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-
+        System.out.println("LOGIN: "+login);
+        System.out.println("SENHA "+senha);
 
         if(login != null) {
             HttpSession session = request.getSession();
-            Cliente cliente = new Cliente(login, senha);
-            session.setAttribute("cliente", cliente);
+            Usuario usuario = new Cliente(login, senha);
+            session.setAttribute("usuario", usuario);
+            System.out.println("LOGIN != NULL");
             return "redirect:controller?action=Home";
         }else {
             return "redirect:controller?action=LoginForm";

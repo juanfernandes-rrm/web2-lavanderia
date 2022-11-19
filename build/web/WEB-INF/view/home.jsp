@@ -11,6 +11,6 @@
     <title>Home</title>
 </head>
 <body>
-    Bem-vindo <%= session.getAttribute("login") %>
+    Bem-vindo <%= session.getAttribute("usuario") %>
 </body>
 </html>
