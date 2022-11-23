@@ -49,7 +49,23 @@ public class Pedido {
     }
 
     public void reprovar(){
-        this.statusPedido.reprovar(this);
+        this.statusPedido.rejeitar(this);
+    }
+    
+    public void cancelar(){
+        this.statusPedido.cancelar(this);
+    }
+    
+    public void recolher(){
+        this.statusPedido.recolher(this);
+    }
+    
+    public void lavar(){
+        this.statusPedido.lavar(this);
+    }
+    
+    public void pagar(){
+        this.statusPedido.pagar(this);
     }
 
     public void finalizar(){

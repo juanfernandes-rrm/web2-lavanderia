@@ -9,6 +9,7 @@ public class EmAberto extends StatusPedido {
         pedido.setStatusPedido(new Cancelado());
     }
     
+    @Override
     public void recolher(Pedido pedido){
         pedido.setStatusPedido(new Recolhido());
     }
