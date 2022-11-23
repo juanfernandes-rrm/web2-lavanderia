@@ -22,16 +22,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col">Calça Jeans</div>
+                            <div class="col-10" id="calca-jeans">Calça Jeans</div>
                             <div class="col">
-                                <div class="row text-end">
-                                    <div class="col">
-                                        <input type="number" class="form-control" id="" placeholder="0">
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-primary">Adicionar peça</a>
-                                    </div>
-                                </div>
+                                <input type="number" class="form-control" id="" placeholder="0">
                             </div>
                         </div>  
                     </div>  
@@ -40,16 +33,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col">Calça Jeans</div>
+                            <div class="col-10" id="calca-jeans">Camiseta</div>
                             <div class="col">
-                                <div class="row text-end">
-                                    <div class="col">
-                                        <input type="number" class="form-control" id="" placeholder="0">
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-primary">Adicionar peça</a>
-                                    </div>
-                                </div>
+                                <input type="number" class="form-control" id="" placeholder="0">
                             </div>
                         </div>  
                     </div>  
@@ -58,16 +44,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col">Camiseta</div>
+                            <div class="col-10" id="calca-jeans">Meia</div>
                             <div class="col">
-                                <div class="row text-end">
-                                    <div class="col">
-                                        <input type="number" class="form-control" id="" placeholder="0">
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-primary">Adicionar peça</a>
-                                    </div>
-                                </div>
+                                <input type="number" class="form-control" id="" placeholder="0">
                             </div>
                         </div>  
                     </div>  
@@ -76,16 +55,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col">Meia</div>
+                            <div class="col-10" id="calca-jeans">Jaqueta</div>
                             <div class="col">
-                                <div class="row text-end">
-                                    <div class="col">
-                                        <input type="number" class="form-control" id="" placeholder="0">
-                                    </div>
-                                    <div class="col">
-                                        <a href="#" class="btn btn-primary">Adicionar peça</a>
-                                    </div>
-                                </div>
+                                <input type="number" class="form-control" id="" placeholder="0">
                             </div>
                         </div>  
                     </div>  
