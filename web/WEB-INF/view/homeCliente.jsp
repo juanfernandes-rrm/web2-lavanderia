@@ -19,7 +19,7 @@
         </div>
         <div class="container text-end col-7">
             <div class="mb-3">
-                <a href="controller?action=CadastraPedido" class="btn btn-primary">Fazer pedido</a> 
+                <a href="controller?action=PedidoForm" class="btn btn-primary">Fazer pedido</a> 
             </div>
             <div class="mb-3">
                 <select class="form-select" aria-label="Todos os pedidos">

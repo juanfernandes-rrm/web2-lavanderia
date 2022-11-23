@@ -1,15 +1,21 @@
 package br.com.tads.model.status;
 
-import br.com.tads.model.Orcamento;
 import br.com.tads.model.Pedido;
 
 public class EmAnalise extends StatusPedido {
 
+    @Override
     public void aprovar(Pedido pedido){
         pedido.setStatusPedido(new EmAberto());
     }
 
-    public void reprovar(Pedido pedido){
+    @Override
+    public void rejeitar(Pedido pedido){
         pedido.setStatusPedido(new Rejeitado());
+    }
+    
+    @Override
+    public void cancelar(Pedido pedido){
+        pedido.setStatusPedido(new Cancelado());
     }
 }

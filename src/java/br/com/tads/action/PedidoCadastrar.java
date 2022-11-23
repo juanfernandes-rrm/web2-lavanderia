@@ -4,6 +4,7 @@
  */
 package br.com.tads.action;
 
+import br.com.tads.model.Pedido;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,11 +14,12 @@ import java.io.IOException;
  *
  * @author juann
  */
-public class CadastraPedido implements Action{
+public class PedidoCadastrar implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:cadastraPedido.jsp";
+        //Pedido pedido = new Pedido();
+        return null;
     }
     
 }

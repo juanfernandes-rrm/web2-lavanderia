@@ -18,7 +18,8 @@
             <h1>PEDIDO</h1>
             </div>
         <div class="container text-end col-7 mt-5">
-            <form action="">
+            
+            <form action="controller?action=Pedido" method="POST">
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
@@ -33,7 +34,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col-10" id="calca-jeans">Camiseta</div>
+                            <div class="col-10" id="camiseta">Camiseta</div>
                             <div class="col">
                                 <input type="number" class="form-control" id="" placeholder="0">
                             </div>
@@ -44,7 +45,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col-10" id="calca-jeans">Meia</div>
+                            <div class="col-10" id="meias">Meia</div>
                             <div class="col">
                                 <input type="number" class="form-control" id="" placeholder="0">
                             </div>
@@ -55,7 +56,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col-10" id="calca-jeans">Jaqueta</div>
+                            <div class="col-10" id="jaqueta">Jaqueta</div>
                             <div class="col">
                                 <input type="number" class="form-control" id="" placeholder="0">
                             </div>
