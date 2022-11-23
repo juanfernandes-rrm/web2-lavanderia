@@ -9,18 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-
-
-
 /**
  *
  * @author juann
  */
-public class Home implements Action {
+public class CadastraPedido implements Action{
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:home.jsp";
+        return "forward:cadastraPedido.jsp";
     }
-
+    
 }
