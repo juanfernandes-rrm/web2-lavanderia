@@ -3,36 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/main.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/PedidoForm.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Orcamento.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/HomeCliente.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/LoginForm.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/home.jsp</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/cadastro.jsp</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/orcamentos.jsp</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/controller/Controller.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Action.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/resources/css/bootstrap.css</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/controller/AutorizacaoFilter.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/cadastraPedido.jsp</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/index.html</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Usuario.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/login.jsp</file>
             <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Login.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/StatusPedido.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/Home.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Endereco.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/Rejeitado.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Pedido.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/TesteFilter.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/Cancelado.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/homeCliente.jsp</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Cliente.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Funcionario.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/controller/Controller.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/enums/RoupaEnum.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/Roupa.java</file>
             <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/action/PedidoCadastrar.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/EmAnalise.java</file>
-            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/src/java/br/com/tads/model/status/EmAberto.java</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/cadastraPedido.jsp</file>
+            <file>file:/C:/Users/juann/Documents/programming/web2/lavanderia/web/WEB-INF/view/login.jsp</file>
         </group>
     </open-files>
 </project-private>
