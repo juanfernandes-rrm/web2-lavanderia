@@ -29,7 +29,7 @@ public class Login implements Action {
             Usuario usuario = new Cliente(login, senha);
             session.setAttribute("usuario", usuario);
             System.out.println("LOGIN != NULL");
-            return "redirect:controller?action=HomeCliente";
+            return "redirect:controller?action=HomeFuncionario";
         }else {
             return "redirect:controller?action=LoginForm";
         }    
