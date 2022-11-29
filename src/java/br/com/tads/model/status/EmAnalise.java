@@ -5,6 +5,11 @@ import br.com.tads.model.Pedido;
 public class EmAnalise extends StatusPedido {
 
     @Override
+    public String status(){
+        return "Em análise";
+    }
+    
+    @Override
     public void aprovar(Pedido pedido){
         pedido.setStatusPedido(new EmAberto());
     }

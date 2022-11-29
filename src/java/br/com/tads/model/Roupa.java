@@ -13,6 +13,14 @@ public class Roupa {
         this.qtdPeca = qtdPeca;
     }
 
+    public RoupaEnum getPeca() {
+        return peca;
+    }
+
+    public int getQtdPeca() {
+        return qtdPeca;
+    }
+    
     @Override
     public String toString() {
         return "Roupa{" + "peca=" + peca + "qtdPeca=" + qtdPeca + '}';

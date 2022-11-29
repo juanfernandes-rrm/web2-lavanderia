@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,130 +31,51 @@
                     <option value="3">pedidos Entregues</option>
                   </select>
             </div>
-
-            <div class="card mb-3">
-                <div class="card-header text-center">
-                    Pedido #00001 - Em aberto
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5 card-text text-start"">
-                            <p class="mb-0">Realizado em 01/01/01</p>
-                            <p>Prazo - 2 dias</p>
+            
+            <c:forEach var="pedido" items="${listPedido}">
+                    <div class="card mb-3">
+                        <div class="card-header text-center">
+                            Pedido #${pedido.numero} - ${pedido.statusPedido.status()}
                         </div>
-                        <div class="col-7">
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Subtotal</div>
-                                <div class="col ">R$ 00,00</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5 card-text text-start"">
+                                    <fmt:parseDate value="${pedido.dataCriacao}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                    <p class="mb-0">Realizado em <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd/MM/yyyy" /></p>
+                                    <p>Prazo - 2 dias</p>
+                                </div>
+                                <div class="col-7">
+                                    <div class="row align-items-start justify-content-between">
+                                        <div class="col text-start">Subtotal</div>
+                                        <div class="col ">R$ 00,00</div>
+                                    </div>
+                                    <div class="row align-items-start justify-content-between">
+                                        <div class="col text-start">Frete</div>
+                                        <div class="col">R$ 00,00</div>
+                                    </div>
+                                    <div class="row align-items-start justify-content-between">
+                                        <div class="col text-start">Total</div>
+                                        <div class="col">R$ 00,00</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Frete</div>
-                                <div class="col">R$ 00,00</div>
+                            <div class="row mt-2">
+                                <div class="text-center">
+                                    <h3>Itens do pedido</h3>
+                                </div>
+                                <ul class="text-start" style="list-style-type:none">
+                                    <c:forEach var="roupa" items="${pedido.roupas}">
+                                        <li>${roupa.qtdPeca}x - ${roupa.peca}</li>
+                                    </c:forEach>
+                                </ul>
                             </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Total</div>
-                                <div class="col">R$ 00,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="text-center">
-                            <h3>Itens do pedido</h3>
-                        </div>
-                        <ul class="text-start" style="list-style-type:none">
-                            <li>1x - Calça</li>
-                            <li>2x - Camiseta</li>
-                            <li>1x - Jaqueta</li>
-                            <li>6x - Meias</li>
-                        </ul>
-                    </div>
-                    <div class="text-end">
-                        <a href="#" class="btn btn-danger">Cancelar pedido</a>
-                        <a href="#" class="btn btn-primary">Pagar pedido</a>   
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header text-center">
-                    Pedido #00001 - Aguardando Pagamento
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5 card-text text-start"">
-                            <p class="mb-0">Realizado em 01/01/01</p>
-                            <p>Prazo - 2 dias</p>
-                        </div>
-                        <div class="col-7">
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Subtotal</div>
-                                <div class="col ">R$ 00,00</div>
-                            </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Frete</div>
-                                <div class="col">R$ 00,00</div>
-                            </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Total</div>
-                                <div class="col">R$ 00,00</div>
+                            <div class="text-end">
+                                <a href="#" class="btn btn-danger">Cancelar pedido</a>
+                                <a href="#" class="btn btn-primary">Pagar pedido</a>   
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-2">
-                        <div class="text-center">
-                            <h3>Itens do pedido</h3>
-                        </div>
-                        <ul class="text-start" style="list-style-type:none">
-                            <li>1x - Calça</li>
-                            <li>2x - Camiseta</li>
-                            <li>1x - Jaqueta</li>
-                            <li>6x - Meias</li>
-                        </ul>
-                    </div>
-                    <div class="text-end">
-                        <a href="#" class="btn btn-primary">Pagar pedido</a>   
-                    </div>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <div class="card-header text-center">
-                    Pedido #00001 - Concluído
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5 card-text text-start"">
-                            <p class="mb-0">Realizado em 01/01/01</p>
-                            <p>Prazo - 2 dias</p>
-                        </div>
-                        <div class="col-7">
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Subtotal</div>
-                                <div class="col ">R$ 00,00</div>
-                            </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Frete</div>
-                                <div class="col">R$ 00,00</div>
-                            </div>
-                            <div class="row align-items-start justify-content-between">
-                                <div class="col text-start">Total</div>
-                                <div class="col">R$ 00,00</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="text-center">
-                            <h3>Itens do pedido</h3>
-                        </div>
-                        <ul class="text-start" style="list-style-type:none">
-                            <li>1x - Calça</li>
-                            <li>2x - Camiseta</li>
-                            <li>1x - Jaqueta</li>
-                            <li>6x - Meias</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                </c:forEach>
             
         </div>
     </body>

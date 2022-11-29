@@ -19,6 +19,9 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+nbproject/private/private.properties
+nbproject/private/private.xml
+nbproject/project.properties
 
 ##########################
 ## IntelliJ

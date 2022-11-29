@@ -9,6 +9,11 @@ import br.com.tads.model.Pedido;
 public class Recolhido extends StatusPedido {
 
     @Override
+    public String status(){
+        return "Recolhido";
+    }
+    
+    @Override
     public void lavar(Pedido pedido){
         pedido.setStatusPedido(new AguardandoPagamento());
     }

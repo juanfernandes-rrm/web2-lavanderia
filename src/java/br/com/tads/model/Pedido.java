@@ -3,12 +3,13 @@ package br.com.tads.model;
 import br.com.tads.model.status.EmAnalise;
 import br.com.tads.model.status.Finalizado;
 import br.com.tads.model.status.StatusPedido;
+import java.io.Serializable;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements Serializable{
     private int numero;
     private Orcamento orcamento;
     private StatusPedido statusPedido;
