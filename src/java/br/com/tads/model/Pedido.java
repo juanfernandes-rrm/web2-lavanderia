@@ -13,12 +13,13 @@ public class Pedido implements Serializable{
     private int numero;
     private Orcamento orcamento;
     private StatusPedido statusPedido;
-    private LocalDateTime dataCriacao = LocalDateTime.now();
+    private LocalDateTime dataCriacao;
     private List<Roupa> roupas = new ArrayList<>();
 
 
     public Pedido() {
         this.statusPedido = new EmAnalise();
+        this.dataCriacao = LocalDateTime.now();
     }
 
     public int getNumero() {

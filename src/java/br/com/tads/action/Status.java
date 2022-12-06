@@ -13,11 +13,14 @@ import java.io.IOException;
  *
  * @author juann
  */
-public class Orcamento implements Action{
+public class Status implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:orcamentos.jsp";
+        //aprovar pedido
+        //rejeitar pedido
+
+        return null;
     }
     
 }

@@ -33,10 +33,8 @@ public class PedidoCadastrar implements Action{
         adicionaPecaNoPedido(RoupaEnum.CAMISETA, converter(qtdCamiseta), pedido);
         
         BancoDeDados.adicionarPedido(pedido);
-        
-        System.out.println(pedido);
-        
-        return "redirect:controller?action=HomeCliente";
+        System.out.println("Id Pedido: "+pedido.getNumero());
+        return "redirect:controller?action=OrcamentoPedido&id="+pedido.getNumero();
     }
     
     private int converter(String string){

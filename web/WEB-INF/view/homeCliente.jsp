@@ -7,6 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<fmt:setLocale value="pt-BR" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -40,22 +42,21 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-5 card-text text-start"">
-                                    <fmt:parseDate value="${pedido.dataCriacao}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
-                                    <p class="mb-0">Realizado em <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd/MM/yyyy" /></p>
-                                    <p>Prazo - 2 dias</p>
+                                    <p class="mb-0">Realizado em: <tags:localDateTime date="${pedido.dataCriacao}"/></p>
+                                    <p>Prazo - <tags:localDate date="${pedido.orcamento.prazo}"/></p></p>
                                 </div>
                                 <div class="col-7">
                                     <div class="row align-items-start justify-content-between">
                                         <div class="col text-start">Subtotal</div>
-                                        <div class="col ">R$ 00,00</div>
+                                        <div class="col "><fmt:formatNumber value="0" minFractionDigits="2" type="currency" /></div>
                                     </div>
                                     <div class="row align-items-start justify-content-between">
                                         <div class="col text-start">Frete</div>
-                                        <div class="col">R$ 00,00</div>
+                                        <div class="col"><fmt:formatNumber value="0" minFractionDigits="2" type="currency" /></div>
                                     </div>
                                     <div class="row align-items-start justify-content-between">
                                         <div class="col text-start">Total</div>
-                                        <div class="col">R$ 00,00</div>
+                                        <div class="col"><fmt:formatNumber value="${pedido.orcamento.valor}" minFractionDigits="2" type="currency" /></div>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +66,7 @@
                                 </div>
                                 <ul class="text-start" style="list-style-type:none">
                                     <c:forEach var="roupa" items="${pedido.roupas}">
-                                        <li>${roupa.qtdPeca}x - ${roupa.peca}</li>
+                                        <li>${roupa.qtdPeca}x - ${roupa.peca} = <fmt:formatNumber value="${roupa.qtdPeca * roupa.peca.preco}" minFractionDigits="2" type="currency" /></li>
                                     </c:forEach>
                                 </ul>
                             </div>
