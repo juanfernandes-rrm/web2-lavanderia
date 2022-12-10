@@ -3,9 +3,10 @@
     Created on : Nov 26, 2022, 2:10:34 PM
     Author     : Felipe
 --%>
-
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,8 +57,70 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <% // tabela dinâmica com adição do botão para "Recolher Pedido"
+                    <% ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
+                    PedidoTeste p = new PedidoTeste();
+                    lista = p.PedidosLista();
+                    
+                    session.setAttribute("pedidos",lista);
+                    int i = 0;
+                    %>
+                    <c:forEach var="pedidos" items="${pedidos}">
+                        <%
+                            PedidoTeste t = new PedidoTeste();
+                            t = lista.get(i);
+                            if (t.getStatusPedido() == "EM ABERTO"){
                         %>
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td><a href="#" class="btn btn-primary">Recolhido</a></td>
+                        </tr> 
+                        <%
+                            }
+                            else if (t.getStatusPedido() == "RECOLHIDO"){
+                        %>    
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td><a href="#" class="btn btn-primary">Lavado</a></td>
+                        </tr> 
+                        <%
+                            }
+                            else if (t.getStatusPedido() == "AGUARDANDO"){
+                        %> 
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td><a href="#" class="btn btn-primary">Pago </a></td>
+                        </tr> 
+                        <%
+                            }
+                            else if (t.getStatusPedido() == "PAGO"){
+                        %>
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td><a href="#" class="btn btn-primary">Finalizar </a></td>
+                        </tr>
+                        <%
+                            }
+                            else if (t.getStatusPedido() == "FINALIZADO"){
+                        %>
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td></td>
+                        </tr>
+                        <%
+                            }
+                            i++;
+                        %>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

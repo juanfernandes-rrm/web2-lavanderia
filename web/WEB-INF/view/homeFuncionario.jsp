@@ -4,7 +4,10 @@
     Author     : Felipe
 --%>
 
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +21,8 @@
             <div class="container px-5">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterRoupas">Cadastro de Itens</a></li>
+                        <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterFuncionario">Manter Funcionário</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=VisualPedidos">Visualização de pedidos</a></li>
                     </ul>
                      <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
@@ -35,8 +40,31 @@
                   </tr>
                 </thead>
                 <tbody>
-                    <% // tabela dinâmica com adição do botão para "Recolher Pedido"
+                    <%                    
+                    ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
+                    PedidoTeste p = new PedidoTeste();
+                    lista = p.PedidosLista();
+                    
+                    session.setAttribute("pedidos",lista);
+                    int i = 0;
+                    %>
+                    <c:forEach var="pedidos" items="${pedidos}">
+                        <%
+                            PedidoTeste t = new PedidoTeste();
+                            t = lista.get(i);
+                            if (t.getStatusPedido() == "EM ABERTO"){
                         %>
+                        <tr>
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td><a href="#" class="btn btn-primary">Recolhido</a></td>
+                        </tr> 
+                        <%
+                            }
+                            i++;
+                        %>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

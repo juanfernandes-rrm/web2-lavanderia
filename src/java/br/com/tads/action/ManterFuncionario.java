@@ -4,20 +4,20 @@
  */
 package br.com.tads.action;
 
+import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  *
  * @author Felipe
  */
-public class HomeFuncionario implements Action{
+public class ManterFuncionario implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:homeFuncionario.jsp";
+        return "forward:manterFuncionario.jsp";
     }
     
 }
