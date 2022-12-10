@@ -44,6 +44,14 @@ public class Pedido {
         this.dataCriacao = dataCriacao;
     }
 
+    public List<Roupa> getRoupas() {
+        return roupas;
+    }
+
+    public void adicionarRoupa(Roupa roupa) {
+        this.roupas.add(roupa);
+    }
+
     public void aprovar(){
         this.statusPedido.aprovar(this);
     }
@@ -83,4 +91,11 @@ public class Pedido {
     public boolean isFinalizado() {
         return statusPedido instanceof Finalizado;
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{" + "numero=" + numero + ", orcamento=" + orcamento + ", statusPedido=" + statusPedido + ", dataCriacao=" + dataCriacao + ", roupas=" + roupas.toString() + '}';
+    }
+    
+    
 }

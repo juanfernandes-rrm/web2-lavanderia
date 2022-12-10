@@ -3,10 +3,16 @@
     Created on : Nov 26, 2022, 2:10:34 PM
     Author     : Felipe
 --%>
+<<<<<<< HEAD
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+=======
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+>>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,6 +63,7 @@
                   </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <% ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
                     PedidoTeste p = new PedidoTeste();
                     lista = p.PedidosLista();
@@ -121,6 +128,10 @@
                             i++;
                         %>
                     </c:forEach>
+=======
+                    <% // tabela dinâmica com adição do botão para "Recolher Pedido"
+                        %>
+>>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
                 </tbody>
             </table>
         </div>

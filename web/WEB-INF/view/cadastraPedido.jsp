@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,54 +21,24 @@
             </div>
         <div class="container text-end col-7 mt-5">
             
-            <form action="controller?action=Pedido" method="POST">
-                <div class="card">
+            <form action="controller?action=PedidoCadastrar" method="POST">
+                
+                <c:forEach var="roupa" items="${listRoupa}">
+                    <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col-10" id="calca-jeans">Calça Jeans</div>
+                            <div class="col-10">${roupa}</div>
                             <div class="col">
-                                <input type="number" class="form-control" id="" placeholder="0">
+                                <input type="number" min="0" class="form-control" name="${roupa}" placeholder="0">
                             </div>
                         </div>  
                     </div>  
                 </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-start">
-                            <div class="col-10" id="camiseta">Camiseta</div>
-                            <div class="col">
-                                <input type="number" class="form-control" id="" placeholder="0">
-                            </div>
-                        </div>  
-                    </div>  
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-start">
-                            <div class="col-10" id="meias">Meia</div>
-                            <div class="col">
-                                <input type="number" class="form-control" id="" placeholder="0">
-                            </div>
-                        </div>  
-                    </div>  
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row text-start">
-                            <div class="col-10" id="jaqueta">Jaqueta</div>
-                            <div class="col">
-                                <input type="number" class="form-control" id="" placeholder="0">
-                            </div>
-                        </div>  
-                    </div>  
-                </div>
+                </c:forEach>
                 
                 <div class="row mt-5">
                     <div class="col">
-                        <a href="#" class="btn btn-primary">Fazer Orçamento</a>
+                        <input class="btn btn-primary" type="submit" value="Fazer Orçamento" />
                     </div>
                 </div>
             </form>

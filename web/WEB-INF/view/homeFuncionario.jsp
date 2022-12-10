@@ -4,10 +4,14 @@
     Author     : Felipe
 --%>
 
+<<<<<<< HEAD
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+=======
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+>>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,8 +25,11 @@
             <div class="container px-5">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+<<<<<<< HEAD
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterRoupas">Cadastro de Itens</a></li>
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterFuncionario">Manter Funcionário</a></li>
+=======
+>>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
                         <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=VisualPedidos">Visualização de pedidos</a></li>
                     </ul>
                      <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
@@ -40,6 +47,7 @@
                   </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <%                    
                     ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
                     PedidoTeste p = new PedidoTeste();
@@ -65,6 +73,10 @@
                             i++;
                         %>
                     </c:forEach>
+=======
+                    <% // tabela dinâmica com adição do botão para "Recolher Pedido"
+                        %>
+>>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
                 </tbody>
             </table>
         </div>

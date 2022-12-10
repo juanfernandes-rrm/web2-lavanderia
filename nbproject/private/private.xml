@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Documents/TADS/Web2/projeto/web2-lavanderia/web/WEB-INF/view/homeFuncionario.jsp</file>
+            <file>file:/D:/Documents/TADS/Web2/projeto/web2-lavanderia/src/java/br/com/tads/model/PedidoTeste.java</file>
+            <file>file:/D:/Documents/TADS/Web2/projeto/web2-lavanderia/src/java/br/com/tads/action/HomeCliente.java</file>
+            <file>file:/D:/Documents/TADS/Web2/projeto/web2-lavanderia/web/WEB-INF/view/visualPedidos.jsp</file>
+        </group>
     </open-files>
 </project-private>
