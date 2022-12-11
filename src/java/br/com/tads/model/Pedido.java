@@ -58,7 +58,7 @@ public class Pedido implements Serializable{
         this.statusPedido.aprovar(this);
     }
 
-    public void reprovar(){
+    public void rejeitar(){
         this.statusPedido.rejeitar(this);
     }
     

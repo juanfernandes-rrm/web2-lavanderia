@@ -66,8 +66,8 @@
                             </ul>
                         </div>
                         <div class="text-end">
-                            <a href="controller?action=Status&status=Rejeitar&id=${pedido.numero}" class="btn btn-danger">Rejeitar</a>
-                            <a href="controller?action=Status&status=Aprovar&id=${pedido.numero}" class="btn btn-primary">Aprovar</a>   
+                            <a href="controller?action=PedidoStatus&status=Rejeitar&id=${pedido.numero}" class="btn btn-danger">Rejeitar</a>
+                            <a href="controller?action=PedidoStatus&status=Aprovar&id=${pedido.numero}" class="btn btn-primary">Aprovar</a>   
                         </div>
                     </div>
                 </div>

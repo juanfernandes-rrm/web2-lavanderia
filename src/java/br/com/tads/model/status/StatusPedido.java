@@ -14,7 +14,7 @@ public abstract class StatusPedido {
     }
 
     public void rejeitar(Pedido pedido){
-        throw new DomainExcepction("Pedido não pode ser reprovado");
+        throw new DomainExcepction("Pedido não pode ser rejeitado");
     }
     
     public void cancelar(Pedido pedido){

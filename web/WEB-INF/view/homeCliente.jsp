@@ -1,9 +1,3 @@
-<%-- 
-    Document   : homeCliente.jsp
-    Created on : 19 de nov. de 2022, 17:05:44
-    Author     : juann
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -26,11 +20,16 @@
                 <a href="controller?action=PedidoForm" class="btn btn-primary">Fazer pedido</a> 
             </div>
             <div class="mb-3">
-                <select class="form-select" aria-label="Todos os pedidos">
+                <select class="form-select" name="filtro-status" aria-label="Todos os pedidos" onchange="controller?action=OrcamentoLista">
                     <option selected>Todos os pedidos</option>
-                    <option value="1">Pedidos Em aberto</option>
-                    <option value="2">Pedidos Cancelados</option>
-                    <option value="3">pedidos Entregues</option>
+                    <option value="Em análise">Em análise</option>
+                    <option value="Rejeitado">Rejeitado</option>
+                    <option value="Em aberto">Em aberto</option>
+                    <option value="Cancelado">Cancelado</option>
+                    <option value="Recolhido">Recolhido</option>
+                    <option value="Aguardando pagamento">Aguardando pagamento</option>
+                    <option value="Pago">Pago</option>
+                    <option value="Finalizado">Finalizado</option>
                   </select>
             </div>
             
@@ -71,8 +70,10 @@
                                 </ul>
                             </div>
                             <div class="text-end">
-                                <a href="#" class="btn btn-danger">Cancelar pedido</a>
-                                <a href="#" class="btn btn-primary">Pagar pedido</a>   
+                                <c:if test="${pedido.statusPedido.status() != 'Rejeitado'}">
+                                    <a href="#" class="btn btn-danger">Cancelar pedido</a>
+                                    <a href="#" class="btn btn-primary">Pagar pedido</a> 
+                                </c:if> 
                             </div>
                         </div>
                     </div>
