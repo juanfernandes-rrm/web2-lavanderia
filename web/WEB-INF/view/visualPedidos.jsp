@@ -3,16 +3,10 @@
     Created on : Nov 26, 2022, 2:10:34 PM
     Author     : Felipe
 --%>
-<<<<<<< HEAD
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-=======
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
->>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
 <!DOCTYPE html>
 <html>
     <head>
@@ -63,7 +57,6 @@
                   </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
                     <% ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
                     PedidoTeste p = new PedidoTeste();
                     lista = p.PedidosLista();
@@ -77,47 +70,57 @@
                             t = lista.get(i);
                             if (t.getStatusPedido() == "EM ABERTO"){
                         %>
-                        <tr>
+                        <tr class="table-warning">
                             <td>${pedidos.numero}</td>
                             <td>${pedidos.dataCriacao}</td>
                             <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary">Recolhido</a></td>
+                            <td><a href="#" class="btn btn-warning col-5">Recolhido</a></td>
                         </tr> 
                         <%
                             }
                             else if (t.getStatusPedido() == "RECOLHIDO"){
                         %>    
-                        <tr>
+                        <tr class="table-secondary">
                             <td>${pedidos.numero}</td>
                             <td>${pedidos.dataCriacao}</td>
                             <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary">Lavado</a></td>
+                            <td><a href="#" class="btn btn-secondary col-5">Lavado</a></td>
                         </tr> 
                         <%
                             }
                             else if (t.getStatusPedido() == "AGUARDANDO"){
                         %> 
-                        <tr>
+                        <tr class="table-info">
                             <td>${pedidos.numero}</td>
                             <td>${pedidos.dataCriacao}</td>
                             <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary">Pago </a></td>
+                            <td><a href="#" class="btn btn-info col-5">Pago </a></td>
                         </tr> 
                         <%
                             }
                             else if (t.getStatusPedido() == "PAGO"){
                         %>
-                        <tr>
+                        <tr style="background-color: #fecba4">
                             <td>${pedidos.numero}</td>
                             <td>${pedidos.dataCriacao}</td>
                             <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary">Finalizar </a></td>
+                            <td><a href="#" class="btn btn-primary col-5" style="background-color: #cb651d">Finalizar </a></td>
                         </tr>
                         <%
                             }
                             else if (t.getStatusPedido() == "FINALIZADO"){
                         %>
-                        <tr>
+                        <tr style="background-color: #74b69a">
+                            <td>${pedidos.numero}</td>
+                            <td>${pedidos.dataCriacao}</td>
+                            <td>${pedidos.statusPedido}</td>
+                            <td></td>
+                        </tr>
+                        <%
+                            }
+                            else if (t.getStatusPedido() == "CANCELADO"){
+                        %>
+                        <tr class="table-danger">
                             <td>${pedidos.numero}</td>
                             <td>${pedidos.dataCriacao}</td>
                             <td>${pedidos.statusPedido}</td>
@@ -128,10 +131,8 @@
                             i++;
                         %>
                     </c:forEach>
-=======
                     <% // tabela dinâmica com adição do botão para "Recolher Pedido"
                         %>
->>>>>>> ef843d8643274b18c1e26a6ff7a9e39269500c36
                 </tbody>
             </table>
         </div>
