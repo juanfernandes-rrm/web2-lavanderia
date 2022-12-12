@@ -29,44 +29,48 @@
                 </div>
             </div>
         </nav>
-       <div class="container" style="margin-top:100px">
-            <table class="table">
-                <thead class="table-primary">
-                  <tr>
-                    <th scope="col">Pedido</th>
-                    <th scope="col">Data/Hora</th>
-                    <th scope="col">Status</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <%                    
-                    ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
-                    PedidoTeste p = new PedidoTeste();
-                    lista = p.PedidosLista();
-                    
-                    session.setAttribute("pedidos",lista);
-                    int i = 0;
-                    %>
-                    <c:forEach var="pedidos" items="${pedidos}">
-                        <%
-                            PedidoTeste t = new PedidoTeste();
-                            t = lista.get(i);
-                            if (t.getStatusPedido() == "EM ABERTO"){
-                        %>
-                        <tr>
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary col-5">Recolhido</a></td>
-                        </tr> 
-                        <%
-                            }
-                            i++;
-                        %>
-                    </c:forEach>
-                </tbody>
-            </table>
+        <div class="container" style="margin-top:100px">
+            <div class="card">
+                <div class="card-body"> 
+                    <table class="table">
+                        <thead class="table-primary">
+                          <tr>
+                            <th scope="col">Pedido</th>
+                            <th scope="col">Data/Hora</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <%                    
+                            ArrayList<PedidoTeste> lista = new ArrayList<>();
+                            PedidoTeste p = new PedidoTeste();
+                            lista = p.PedidosLista();
+
+                            session.setAttribute("pedidos",lista);
+                            int i = 0;
+                            %>
+                            <c:forEach var="pedidos" items="${pedidos}">
+                                <%
+                                    PedidoTeste t = new PedidoTeste();
+                                    t = lista.get(i);
+                                    if (t.getStatusPedido() == "EM ABERTO"){
+                                %>
+                                <tr>
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td><a href="#" class="btn btn-primary col-5">Recolhido</a></td>
+                                </tr> 
+                                <%
+                                    }
+                                    i++;
+                                %>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </body>
     

@@ -47,94 +47,98 @@
 
         
         <div class="container" style="margin-top:20px">
-            <table class="table">
-                <thead class="table-primary">
-                  <tr>
-                    <th scope="col">Pedido</th>
-                    <th scope="col">Data/Hora</th>
-                    <th scope="col">Status</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% ArrayList<PedidoTeste> lista = new ArrayList<PedidoTeste>();
-                    PedidoTeste p = new PedidoTeste();
-                    lista = p.PedidosLista();
-                    
-                    session.setAttribute("pedidos",lista);
-                    int i = 0;
-                    %>
-                    <c:forEach var="pedidos" items="${pedidos}">
-                        <%
-                            PedidoTeste t = new PedidoTeste();
-                            t = lista.get(i);
-                            if (t.getStatusPedido() == "EM ABERTO"){
-                        %>
-                        <tr class="table-warning">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-warning col-5">Recolhido</a></td>
-                        </tr> 
-                        <%
-                            }
-                            else if (t.getStatusPedido() == "RECOLHIDO"){
-                        %>    
-                        <tr class="table-secondary">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-secondary col-5">Lavado</a></td>
-                        </tr> 
-                        <%
-                            }
-                            else if (t.getStatusPedido() == "AGUARDANDO"){
-                        %> 
-                        <tr class="table-info">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-info col-5">Pago </a></td>
-                        </tr> 
-                        <%
-                            }
-                            else if (t.getStatusPedido() == "PAGO"){
-                        %>
-                        <tr style="background-color: #fecba4">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td><a href="#" class="btn btn-primary col-5" style="background-color: #cb651d">Finalizar </a></td>
-                        </tr>
-                        <%
-                            }
-                            else if (t.getStatusPedido() == "FINALIZADO"){
-                        %>
-                        <tr style="background-color: #74b69a">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td></td>
-                        </tr>
-                        <%
-                            }
-                            else if (t.getStatusPedido() == "CANCELADO"){
-                        %>
-                        <tr class="table-danger">
-                            <td>${pedidos.numero}</td>
-                            <td>${pedidos.dataCriacao}</td>
-                            <td>${pedidos.statusPedido}</td>
-                            <td></td>
-                        </tr>
-                        <%
-                            }
-                            i++;
-                        %>
-                    </c:forEach>
-                    <% // tabela dinâmica com adição do botão para "Recolher Pedido"
-                        %>
-                </tbody>
-            </table>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="table-primary">
+                          <tr>
+                            <th scope="col">Pedido</th>
+                            <th scope="col">Data/Hora</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% ArrayList<PedidoTeste> lista = new ArrayList<>();
+                            PedidoTeste p = new PedidoTeste();
+                            lista = p.PedidosLista();
+
+                            session.setAttribute("pedidos",lista);
+                            int i = 0;
+                            %>
+                            <c:forEach var="pedidos" items="${pedidos}">
+                                <%
+                                    PedidoTeste t = new PedidoTeste();
+                                    t = lista.get(i);
+                                    if (t.getStatusPedido() == "EM ABERTO"){
+                                %>
+                                <tr class="table-warning">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td><a href="#" class="btn btn-warning col-5">Recolhido</a></td>
+                                </tr> 
+                                <%
+                                    }
+                                    else if (t.getStatusPedido() == "RECOLHIDO"){
+                                %>    
+                                <tr class="table-secondary">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td><a href="#" class="btn btn-secondary col-5">Lavado</a></td>
+                                </tr> 
+                                <%
+                                    }
+                                    else if (t.getStatusPedido() == "AGUARDANDO"){
+                                %> 
+                                <tr class="table-info">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td><a href="#" class="btn btn-info col-5">Pago </a></td>
+                                </tr> 
+                                <%
+                                    }
+                                    else if (t.getStatusPedido() == "PAGO"){
+                                %>
+                                <tr style="background-color: #fecba4">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td><a href="#" class="btn btn-primary col-5" style="background-color: #cb651d">Finalizar </a></td>
+                                </tr>
+                                <%
+                                    }
+                                    else if (t.getStatusPedido() == "FINALIZADO"){
+                                %>
+                                <tr style="background-color: #74b69a">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td></td>
+                                </tr>
+                                <%
+                                    }
+                                    else if (t.getStatusPedido() == "CANCELADO"){
+                                %>
+                                <tr class="table-danger">
+                                    <td>${pedidos.numero}</td>
+                                    <td>${pedidos.dataCriacao}</td>
+                                    <td>${pedidos.statusPedido}</td>
+                                    <td></td>
+                                </tr>
+                                <%
+                                    }
+                                    i++;
+                                %>
+                            </c:forEach>
+                            <% // tabela dinâmica com adição do botão para "Recolher Pedido"
+                                %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>                 
         </div>
     </body>
 <!-- CSS only -->

@@ -21,18 +21,17 @@ public class Login implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-        System.out.println("LOGIN: "+login);
-        System.out.println("SENHA "+senha);
 
         if(login != null) {
             HttpSession session = request.getSession();
             Usuario usuario = new Cliente(login, senha);
             session.setAttribute("usuario", usuario);
             System.out.println("LOGIN != NULL");
-            return "redirect:controller?action=HomeFuncionario";
-        }else {
-            return "redirect:controller?action=LoginForm";
-        }    
+            if ("cliente@email.com".equals(login)){
+                return "redirect:controller?action=HomeCliente";}
+            if ("funcionario@email.com".equals(login)){
+                return "redirect:controller?action=HomeFuncionario";}
+        }
+    return "redirect:controller?action=LoginForm";
     }
-    
 }
