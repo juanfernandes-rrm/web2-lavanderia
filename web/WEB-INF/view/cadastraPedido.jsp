@@ -27,9 +27,9 @@
                     <div class="card">
                     <div class="card-body">
                         <div class="row text-start">
-                            <div class="col-10">${roupa}</div>
+                            <div class="col-10">${roupa.peca}</div>
                             <div class="col">
-                                <input type="number" min="0" class="form-control" name="${roupa}" placeholder="0">
+                                <input type="number" min="0" class="form-control" name="${roupa.id}" placeholder="0">
                             </div>
                         </div>  
                     </div>  

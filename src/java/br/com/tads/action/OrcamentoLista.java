@@ -15,7 +15,6 @@ import java.io.IOException;
  * @author juann
  */
 public class OrcamentoLista implements Action{
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("listPedidosEmAnalise", BancoDeDados.getPedidosEmAnalise());

@@ -14,13 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  *
  * @author juann
  */
+//Action que monta o orçamento
 public class OrcamentoPedido implements Action{
 
     @Override

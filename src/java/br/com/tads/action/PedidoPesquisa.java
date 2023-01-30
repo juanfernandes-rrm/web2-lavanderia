@@ -4,19 +4,28 @@
  */
 package br.com.tads.action;
 
+import br.com.tads.model.BancoDeDados;
+import br.com.tads.model.Pedido;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author juann
  */
-public class TesteFilter implements Action{
+public class PedidoPesquisa implements Action{
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return "forward:teste.jsp";
+        int pedidoId = Integer.parseInt(request.getParameter("pesquisaPedido"));
+        List<Pedido> pedido = new ArrayList<>();
+        pedido.add(BancoDeDados.getPedido(pedidoId));
+        request.setAttribute("listPedido", pedido);
+        return "forward:homeCliente.jsp";
     }
     
 }

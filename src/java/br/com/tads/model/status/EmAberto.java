@@ -19,6 +19,7 @@ public class EmAberto extends StatusPedido {
         pedido.setStatusPedido(new Recolhido());
     }
     
+    //verificar esse aqui
     @Override
     public void finalizar(Pedido pedido) {
         pedido.setStatusPedido(new Finalizado());

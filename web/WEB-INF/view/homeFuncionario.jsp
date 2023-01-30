@@ -18,9 +18,10 @@
             <div class="container px-5">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=VisualPedidos">Visualização de pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-2 mt-1" href="controller?action=HomeFuncionario">Home</a></li>
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=PedidoForm">Fazer pedido</a></li>
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=Login">Sair</a></li>
                     </ul>
-                     <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
                 </div>
             </div>
         </nav>

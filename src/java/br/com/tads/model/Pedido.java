@@ -14,7 +14,6 @@ public class Pedido implements Serializable{
     private Orcamento orcamento;
     private StatusPedido statusPedido;
     private LocalDateTime dataCriacao;
-    private List<Roupa> roupas = new ArrayList<>();
 
 
     public Pedido() {
@@ -44,14 +43,6 @@ public class Pedido implements Serializable{
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
-    }
-
-    public List<Roupa> getRoupas() {
-        return roupas;
-    }
-
-    public void adicionarRoupa(Roupa roupa) {
-        this.roupas.add(roupa);
     }
 
     public void aprovar(){
@@ -96,7 +87,7 @@ public class Pedido implements Serializable{
 
     @Override
     public String toString() {
-        return "Pedido{" + "numero=" + numero + ", orcamento=" + orcamento + ", statusPedido=" + statusPedido + ", dataCriacao=" + dataCriacao + ", roupas=" + roupas.toString() + '}';
+        return "Pedido{" + "numero=" + numero + ", orcamento=" + orcamento + ", statusPedido=" + statusPedido + ", dataCriacao=" + dataCriacao + '}';
     }
     
     

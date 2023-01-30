@@ -29,7 +29,13 @@ public class PedidoStatus implements Action{
                 pedido.rejeitar();
             }
             case "Pagar" ->{
+                pedido.recolher();
+                pedido.lavar();
                 pedido.pagar();
+                pedido.finalizar();
+            }
+            case "Cancelar" -> {
+                pedido.cancelar();
             }
         }
         

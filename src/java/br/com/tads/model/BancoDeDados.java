@@ -5,9 +5,12 @@
 package br.com.tads.model;
 
 import br.com.tads.model.status.EmAnalise;
+import br.com.tads.model.status.StatusPedido;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -27,7 +30,9 @@ public class BancoDeDados implements Serializable{
     }
 
     public static List<Pedido> getPedidos() {
-        return pedidos;
+        return pedidos.stream()
+                .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                .collect(Collectors.toList());
     }
     
     public static List<Pedido> getPedidosEmAnalise() {
@@ -47,5 +52,14 @@ public class BancoDeDados implements Serializable{
             }
         }
         return null;
+    }
+    
+    public static List<Pedido> getPedidoPorStatus(StatusPedido statusPedido){
+        System.out.println("banco pedidos: "+pedidos.toString());
+        System.out.println("Banco Status:"+statusPedido);
+        return pedidos.stream()
+                .filter(pedido -> pedido.getStatusPedido().getClass() == statusPedido.getClass())
+                .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                .collect(Collectors.toList());
     }
 }

@@ -5,8 +5,8 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 
 public class Orcamento {
-    private BigDecimal valor;
-    private LocalDate prazo;
+    private BigDecimal valor; //valorTotal
+    private LocalDate prazo; //prazo de entrega
 
     public Orcamento() {
         this.valor = new BigDecimal(BigInteger.ZERO);
@@ -26,7 +26,9 @@ public class Orcamento {
     }
 
     public void setPrazo(LocalDate prazo) {
-        this.prazo = prazo;
+        if(this.prazo.isBefore(prazo)){
+            this.prazo = prazo;
+        }
     }
 
 

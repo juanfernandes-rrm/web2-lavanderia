@@ -12,16 +12,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="resources/css/bootstrap.css">
         <title>Orçamentos</title>
     </head>
     <body>
-        <div class="text-center my-3">
-            <h1>ORÇAMENTOS</h1>
+        <nav class="navbar navbar-expand-lg navbar-light shadow-sm" id="mainNav">
+            <div class="container px-5">
+                <span class="navbar-brand mb-0 h1">LOL</span>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=PedidoForm">Fazer pedido</a></li>
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=Logout">Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="text-center my-3 mt-1">
+            <h1>Orçamentos</h1>
         </div>
-
+        
         <div class="container text-end col-7">
             <div class="mb-3">
                 <a href="controller?action=HomeCliente" class="btn btn-primary">Home</a> 
