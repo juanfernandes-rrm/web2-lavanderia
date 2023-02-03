@@ -11,14 +11,15 @@ import java.sql.SQLException;
 
 public class ConnectionFactory implements AutoCloseable{
 	
-    private static String DRIVER= "org.postgresql.Driver";
-    private static String URL= "jdbc:postgresql://localhost:5432/postgres?currentSchema=lavanderia";
-    private static String LOGIN= "postgres";
-    private static String SENHA= "root";
-    private static Connection con= null;
+    private static String DRIVER = "org.postgresql.Driver";
+    private static String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=lavanderia";
+    private static String LOGIN = "postgres";
+    private static String SENHA = "root";
     
-    public static Connection getConnection() throws DAOException{
-        if(con== null){
+    private static Connection con = null;
+    
+    public Connection getConnection() throws DAOException{
+        if(con == null){
             try{
                 Class.forName(DRIVER);
                 con= DriverManager.getConnection(URL, LOGIN, SENHA);
@@ -29,9 +30,10 @@ public class ConnectionFactory implements AutoCloseable{
             }
         }return con;
     }
+    
     @Override
     public void close() throws Exception {
-        if(con!=null){
+        if(con != null){
             try{ 
                 con.close();
                 con= null;

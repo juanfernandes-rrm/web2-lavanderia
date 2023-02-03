@@ -14,11 +14,13 @@ public class Pedido implements Serializable{
     private Orcamento orcamento;
     private StatusPedido statusPedido;
     private LocalDateTime dataCriacao;
+    private List<Peca> pecas;
 
 
     public Pedido() {
         this.statusPedido = new EmAnalise();
         this.dataCriacao = LocalDateTime.now();
+        this.pecas = new ArrayList();
     }
 
     public int getNumero() {
@@ -43,6 +45,14 @@ public class Pedido implements Serializable{
 
     public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public List<Peca> getPecas() {
+        return pecas;
+    }
+
+    public void adicionarPeca(Peca pecas) {
+        this.pecas.add(pecas);
     }
 
     public void aprovar(){
@@ -84,6 +94,7 @@ public class Pedido implements Serializable{
     public boolean isFinalizado() {
         return statusPedido instanceof Finalizado;
     }
+    
 
     @Override
     public String toString() {

@@ -36,30 +36,31 @@ public class RoupaDAO implements DAO<Roupa>{
     }
     
     @Override
-    public Roupa buscar(long id) throws DAOException {
+    public Roupa buscar (long id) throws DAOException{
         Roupa roupa = new Roupa();
-        try(PreparedStatement st = con.prepareStatement(QUERY_BUSCAR)){
-            st.setInt(1, (int) id);
-            st.execute();
-            try(ResultSet rs = st.getResultSet()){
-		while(rs.next()) {
-                    roupa.setId(rs.getInt(1));
-                    roupa.setPeca(rs.getString(2));
-                    roupa.setValor(rs.getDouble(3));
-                    roupa.setPrazoEntrega(rs.getInt(4));
-		}
-            }
-        }catch(SQLException e) {
-            throw new DAOException("Erro buscando roupa: "+QUERY_BUSCAR_TODOS, e);
-        }
+        try (PreparedStatement stmt = con.prepareStatement("SELECT id, peca, valor, prazo_entrega FROM roupa WHERE roupa.id = ?")) {
+            stmt.setInt(1, (int) id);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                if (rs.next()) {
+                    roupa.setId(rs.getInt("id"));
+                    roupa.setPeca(rs.getString("peca"));
+                    roupa.setValor(rs.getDouble("valor"));
+                    roupa.setPrazoEntrega(rs.getInt("prazo_entrega"));
+                } else {
+                    System.out.println("No object found with id " + id);
+                }
+
+              }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
         return roupa;
     }
 
     @Override
     public List<Roupa> buscarTodos() throws DAOException {
         List<Roupa> lista = new ArrayList<>();
-        try(
-            PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_TODOS);
+        try(PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_TODOS);
             ResultSet rs = st.executeQuery()) {
             while(rs.next()) {
                 Roupa roupa = new Roupa();

@@ -11,8 +11,11 @@ import br.com.tads.model.Pedido;
 import br.com.tads.model.Roupa;
 import br.com.tads.model.RoupaPedido;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class main {
     public static void main(String[] args) throws DAOException {
@@ -33,36 +36,44 @@ public class main {
 //            endereco.setCidade("Pinhais");
 //            endereco.setEstado("Paraná");
 
-            Connection conn = ConnectionFactory.getConnection();
+            
 //            EnderecoDAO enderecoDAO = new EnderecoDAO(conn);
 //            enderecoDAO.inserir(endereco);
 //            cliente.setEndereco(endereco);
 //            ClienteDAO clienteDAO = new ClienteDAO(conn);
 //            clienteDAO.inserir(cliente);
 
-              Roupa roupa = new Roupa("CAMISETA",5.0,2);
-              RoupaDAO roupaDAO = new RoupaDAO(conn);
-              roupaDAO.inserir(roupa);
+//              Roupa roupa = new Roupa("CAMISETA",5.0,2);
+                try(Connection conn = ConnectionFactory.getConnection()){
+                    RoupaDAO roupaDAO = new RoupaDAO(conn);
+                    int num = 2;
+                    Roupa roupa = roupaDAO.buscar(num);
+                    System.out.println("Roupa: "+roupa.toString());
+                } catch (SQLException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
               
-              Orcamento orcamento = new Orcamento();
-              orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
-              orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()));
-              
-              Pedido pedido = new Pedido();
-              pedido.setOrcamento(orcamento);
-              PedidoDAO pedidoDAO = new PedidoDAO(conn);
-              pedidoDAO.inserir(pedido);
-              
-              RoupaPedido roupaPedido = new RoupaPedido();
-              roupaPedido.setPedido(pedido);
-              roupaPedido.setRoupa(roupa);
-              roupaPedido.setQtd(3);
-              RoupaPedidoDAO roupaPedidoDAO = new RoupaPedidoDAO(conn);
-              roupaPedidoDAO.inserirRoupaPedido(roupaPedido);
-              
-              List<Roupa> roupas = roupaDAO.buscarTodos();
-              roupas.stream().forEach(r -> {
-                  System.out.println(r.getPeca());
-              });
+//              roupaDAO.inserir(roupa);
+//              
+//              Orcamento orcamento = new Orcamento();
+//              orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
+//              orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()));
+//              
+//              Pedido pedido = new Pedido();
+//              pedido.setOrcamento(orcamento);
+//              PedidoDAO pedidoDAO = new PedidoDAO(conn);
+//              pedidoDAO.inserir(pedido);
+//              
+//              RoupaPedido roupaPedido = new RoupaPedido();
+//              roupaPedido.setPedido(pedido);
+//              roupaPedido.setRoupa(roupa);
+//              roupaPedido.setQtd(3);
+//              RoupaPedidoDAO roupaPedidoDAO = new RoupaPedidoDAO(conn);
+//              roupaPedidoDAO.inserirRoupaPedido(roupaPedido);
+//              
+//              List<Roupa> roupas = roupaDAO.buscarTodos();
+//              roupas.stream().forEach(r -> {
+//                  System.out.println(r.getPeca());
+//              });
     }
 }

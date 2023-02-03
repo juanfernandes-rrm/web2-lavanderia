@@ -5,6 +5,13 @@ public class Roupa {
     private String peca; //peca e preco no enum
     private double valor;
     private int prazoEntrega;// talvez representar por dias úteis
+
+    public Roupa(int id, String peca, double valor, int prazoEntrega) {
+        this.id = id;
+        this.peca = peca;
+        this.valor = valor;
+        this.prazoEntrega = prazoEntrega;
+    }
     
     //ajustar para calcular o valor
     public Roupa(String peca, double valor, int prazoEntrega) {
@@ -47,6 +54,9 @@ public class Roupa {
     public void setPrazoEntrega(int prazoEntrega) {
         this.prazoEntrega = prazoEntrega;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Roupa{" + "id=" + id + ", peca=" + peca + ", valor=" + valor + ", prazoEntrega=" + prazoEntrega + '}';
+    }
 }

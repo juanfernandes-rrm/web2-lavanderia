@@ -7,20 +7,16 @@ package br.com.tads.action;
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
 import br.com.tads.dao.RoupaDAO;
-import br.com.tads.dao.RoupaPedidoDAO;
 import br.com.tads.exceptions.DAOException;
-import br.com.tads.model.BancoDeDados;
 import br.com.tads.model.Orcamento;
+import br.com.tads.model.Peca;
 import br.com.tads.model.Pedido;
 import br.com.tads.model.Roupa;
-import br.com.tads.model.RoupaPedido;
-import br.com.tads.model.enums.RoupaEnum;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -42,46 +38,46 @@ public class PedidoCadastrar implements Action{
         Orcamento orcamento = new Orcamento();
         
         while (parameterNames.hasMoreElements()) {
-            String id_roupa = (String) parameterNames.nextElement();
-            String qtdPeca = request.getParameter(id_roupa);
+            String idRoupa = (String) parameterNames.nextElement();
+            String qtdPeca = request.getParameter(idRoupa);
             
-            if(converter(qtdPeca)>0){
-                try(Connection conn = ConnectionFactory.getConnection()) {
+            //adiciona roupas no pedido
+            int qtd = converter(qtdPeca);
+            if(qtd>0){
+                try(ConnectionFactory factory = new ConnectionFactory()) {
+                    Connection conn = factory.getConnection();
+                    
                     RoupaDAO roupaDAO = new RoupaDAO(conn);
-                    Roupa roupa = roupaDAO.buscar(converter(id_roupa));
-                    System.out.println("Roupa: "+roupa.toString());
+                    Roupa roupa = roupaDAO.buscar(converter(idRoupa));
+                    Peca peca = new Peca(roupa, qtd);
                     
                     orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
                     orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()));
+                    
                     pedido.setOrcamento(orcamento);
+                    pedido.adicionarPeca(peca);
                     
-                    
-                    RoupaPedidoDAO roupaPedidoDAO = new RoupaPedidoDAO(conn);
-                    RoupaPedido roupaPedido = new RoupaPedido(roupa, pedido, qtdPeca);
-                    roupaPedidoDAO.inserirRoupaPedido(roupaPedido);
+                    PedidoDAO pedidoDAO = new PedidoDAO(conn);
+                    pedidoDAO.inserir(pedido);
                 } catch (DAOException | SQLException ex) {
+                    Logger.getLogger(PedidoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
                     Logger.getLogger(PedidoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        
-        try(Connection conn = ConnectionFactory.getConnection()) {
-            PedidoDAO pedidoDAO = new PedidoDAO(conn);
-            pedidoDAO.inserir(pedido);
-        } catch (DAOException | SQLException ex) {
-            Logger.getLogger(PedidoCadastrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         return "redirect:controller?action=HomeCliente";
     }
     
-    private int converter(String string){
-        try{
-            if(!(string==null || string.isBlank())){
-                return Integer.parseInt(string);
+    private int converter(String num){
+        if(!"PedidoCadastrar".equals(num)){
+            if(!num.isEmpty() && !num.isBlank()){
+                try{
+                    return Integer.parseInt(num);
+                }catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
             }
-        }catch(NumberFormatException e){
-            return 0;
         }
         return 0;
     }

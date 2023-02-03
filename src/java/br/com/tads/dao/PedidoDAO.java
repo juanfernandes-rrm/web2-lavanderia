@@ -5,8 +5,8 @@
 package br.com.tads.dao;
 
 import br.com.tads.exceptions.DAOException;
+import br.com.tads.model.Peca;
 import br.com.tads.model.Pedido;
-import br.com.tads.model.Roupa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,10 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,8 +24,8 @@ public class PedidoDAO implements DAO<Pedido>{
 
     private Connection con = null;
 
-    private static final String QUERY_INSERIR_ROUPA_PEDIDO= "INSERT INTO roupa_pedido(pedido_fk, roupa_fk, qtd_peca) VALUES (?, ?, ?)";
     private static final String QUERY_INSERIR= "INSERT INTO pedido(prazo, status_pedido, data_criacao) VALUES (?, ?, ?)";
+    private static final String QUERY_INSERIR_ROUPA = "INSERT INTO roupa_pedido(pedido_fk, roupa_fk, qtd_peca) VALUES (?, ?, ?)";
     private static final String QUERY_BUSCAR_TODOS= "SELECT numero, prazo, status_pedido, data_criacao FROM pedido";
     
     public PedidoDAO(Connection con) throws DAOException{
@@ -60,6 +57,7 @@ public class PedidoDAO implements DAO<Pedido>{
             try (ResultSet generatedKeys = st.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     pedido.setNumero(generatedKeys.getInt(1));
+                    inserirPecas(pedido.getNumero(), pedido.getPecas());
                 }
                 else {
                     throw new SQLException("Criação de pedido falhou.");
@@ -82,15 +80,17 @@ public class PedidoDAO implements DAO<Pedido>{
     }
     
     
-    private void inserirRoupaPedido(int numero_pedido, Roupa roupa) throws DAOException {
-        try(PreparedStatement st = con.prepareStatement(QUERY_INSERIR_ROUPA_PEDIDO)){
-            st.setInt(1, numero_pedido);
-            st.setInt(2, roupa.getId());
-            //st.setInt(3, roupa.getQtdPeca());
-            
-            st.executeUpdate();
-        }catch(SQLException e) {
-            throw new DAOException("Erro ao inserir pedido: "+ QUERY_INSERIR_ROUPA_PEDIDO + "/ "+ roupa.toString(), e);
-        }
+    private void inserirPecas(int numeroPedido, List<Peca> pecas){
+        pecas.stream().forEach(peca -> {
+            try(PreparedStatement st = con.prepareStatement(QUERY_INSERIR_ROUPA)){
+                st.setInt(1, numeroPedido);
+                st.setInt(2, peca.getId());
+                st.setInt(3, peca.getQtd());
+
+                st.executeUpdate();
+            }catch(SQLException e) {
+                e.printStackTrace();
+            }
+        });   
     }
 }
