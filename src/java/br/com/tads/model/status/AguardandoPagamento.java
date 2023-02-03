@@ -10,7 +10,7 @@ public class AguardandoPagamento extends StatusPedido {
 
     @Override
     public String status(){
-        return "Aguardando pagamento";
+        return "AguardandoPagamento";
     }
     
     @Override

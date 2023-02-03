@@ -113,14 +113,14 @@
                                     <h3>Itens do pedido</h3>
                                 </div>
                                 <ul class="text-start" style="list-style-type:none">
-                                    <c:forEach var="roupa" items="${pedido.roupas}">
-                                        <li>${roupa.qtdPeca}x - ${roupa.peca} = <fmt:formatNumber value="${roupa.qtdPeca * roupa.peca.preco}" minFractionDigits="2" type="currency" /></li>
+                                    <c:forEach var="peca" items="${pedido.pecas}">
+                                        <li>${peca.qtdPeca}x - ${peca.peca} = <fmt:formatNumber value="${peca.qtd * peca.preco}" minFractionDigits="2" type="currency" /></li>
                                     </c:forEach>
                                 </ul>
                             </div>
                             <div class="text-end">
                                 <c:if test="${pedido.statusPedido.status() != 'Rejeitado'
-                                              &&  pedido.statusPedido.status() != 'Em análise'
+                                              &&  pedido.statusPedido.status() != 'EmAnalise'
                                               &&  pedido.statusPedido.status() != 'Cancelado'
                                               &&  pedido.statusPedido.status() != 'Finalizado'}">
                                     <a href="controller?action=PedidoStatus&status=Cancelar&id=${pedido.numero}" class="btn btn-danger">Cancelar pedido</a>

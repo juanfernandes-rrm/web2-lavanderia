@@ -4,12 +4,12 @@ import java.sql.Connection;
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
 import br.com.tads.dao.RoupaDAO;
-import br.com.tads.dao.RoupaPedidoDAO;
 import br.com.tads.exceptions.DAOException;
 import br.com.tads.model.Orcamento;
+import br.com.tads.model.Peca;
 import br.com.tads.model.Pedido;
 import br.com.tads.model.Roupa;
-import br.com.tads.model.RoupaPedido;
+import br.com.tads.model.status.EmAnalise;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -44,12 +44,27 @@ public class main {
 //            clienteDAO.inserir(cliente);
 
 //              Roupa roupa = new Roupa("CAMISETA",5.0,2);
-                try(Connection conn = ConnectionFactory.getConnection()){
+                try(ConnectionFactory factory = new ConnectionFactory()){
+                    Connection conn = factory.getConnection();
                     RoupaDAO roupaDAO = new RoupaDAO(conn);
-                    int num = 2;
-                    Roupa roupa = roupaDAO.buscar(num);
-                    System.out.println("Roupa: "+roupa.toString());
+                    Roupa roupa = roupaDAO.buscar(2);
+                    Peca peca = new Peca(roupa, 3);
+                    
+                    Orcamento orcamento = new Orcamento();
+                    orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
+                    orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()).multiply(BigDecimal.valueOf(3)));
+                    
+                    Pedido pedido = new Pedido();
+                    pedido.setOrcamento(orcamento);
+                    pedido.adicionarPeca(peca);
+                    
+                    PedidoDAO pedidoDAO = new PedidoDAO(conn);
+                    pedidoDAO.inserir(pedido);
+                    
+                    System.out.println("Lista: "+pedidoDAO.buscarPorStatus(new EmAnalise()));
                 } catch (SQLException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
                     Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
                 }
               

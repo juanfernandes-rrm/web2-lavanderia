@@ -6,7 +6,7 @@ public class EmAnalise extends StatusPedido {
 
     @Override
     public String status(){
-        return "Em análise";
+        return "EmAnalise";
     }
     
     @Override

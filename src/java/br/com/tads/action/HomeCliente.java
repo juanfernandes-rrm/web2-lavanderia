@@ -4,11 +4,17 @@
  */
 package br.com.tads.action;
 
+import br.com.tads.connection.ConnectionFactory;
+import br.com.tads.dao.PedidoDAO;
 import br.com.tads.model.BancoDeDados;
+import br.com.tads.model.Pedido;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +24,13 @@ public class HomeCliente implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("listPedido", BancoDeDados.getPedidos());
+        try(ConnectionFactory factory = new ConnectionFactory()){
+            PedidoDAO pedidoDAO = new PedidoDAO(factory.getConnection());
+            List<Pedido> pedidos = pedidoDAO.buscarTodos();
+            request.setAttribute("listPedido", pedidos);
+        } catch (Exception ex) {
+            Logger.getLogger(HomeCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "forward:homeCliente.jsp";
     }
     

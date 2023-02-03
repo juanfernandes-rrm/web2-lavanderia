@@ -52,7 +52,7 @@ public class PedidoCadastrar implements Action{
                     Peca peca = new Peca(roupa, qtd);
                     
                     orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
-                    orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()));
+                    orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()).multiply(BigDecimal.valueOf(qtd)));
                     
                     pedido.setOrcamento(orcamento);
                     pedido.adicionarPeca(peca);
@@ -66,7 +66,7 @@ public class PedidoCadastrar implements Action{
                 }
             }
         }
-        return "redirect:controller?action=HomeCliente";
+        return "redirect:controller?action=OrcamentoLista";
     }
     
     private int converter(String num){

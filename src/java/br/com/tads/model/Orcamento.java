@@ -8,6 +8,13 @@ public class Orcamento {
     private BigDecimal valor; //valorTotal
     private LocalDate prazo; //prazo de entrega
 
+    public Orcamento(BigDecimal valor, LocalDate prazo) {
+        this.valor = valor;
+        this.prazo = prazo;
+    }
+
+    
+    
     public Orcamento() {
         this.valor = new BigDecimal(BigInteger.ZERO);
         this.prazo = LocalDate.now();

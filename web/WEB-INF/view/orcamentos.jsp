@@ -71,8 +71,8 @@
                                 <h3>Itens do pedido</h3>
                             </div>
                             <ul class="text-start" style="list-style-type:none">
-                                <c:forEach var="roupa" items="${pedido.roupas}">
-                                    <li>${roupa.qtdPeca}x - ${roupa.peca} = <fmt:formatNumber value="${roupa.qtdPeca * roupa.peca.preco}" minFractionDigits="2" type="currency" /></li>
+                                <c:forEach var="peca" items="${pedido.pecas}">
+                                    <li>${peca.qtd}x - ${peca.peca} = <fmt:formatNumber value="${peca.qtd * peca.preco}" minFractionDigits="2" type="currency" /></li>
                                 </c:forEach>
                             </ul>
                         </div>
