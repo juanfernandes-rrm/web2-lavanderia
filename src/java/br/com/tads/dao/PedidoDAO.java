@@ -19,9 +19,11 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -83,7 +85,7 @@ public class PedidoDAO implements DAO<Pedido>{
     public List<Pedido> buscarPorStatus(StatusPedido statusPedido) throws DAOException {
         List<Pedido> pedidos = new ArrayList<>();
         try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao FROM pedido WHERE pedido.status_pedido = ?")) {
-            stmt.setString(1, statusPedido.status());
+            stmt.setString(1, statusPedido.getClass().getSimpleName());
             try (ResultSet rs = stmt.executeQuery()) { 
                 while (rs.next()) {
                     Pedido pedido = new Pedido();
@@ -111,13 +113,15 @@ public class PedidoDAO implements DAO<Pedido>{
           } catch (SQLException e) {
               e.printStackTrace();
           }
-        return pedidos;
+        return pedidos.stream()
+                    .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                    .collect(Collectors.toList());
     }
     
     
     @Override
     public List<Pedido> buscarTodos() throws DAOException {
-        List<Pedido> lista = new ArrayList<>();
+        List<Pedido> pedidos = new ArrayList<>();
         try(PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_TODOS);
             ResultSet rs = st.executeQuery()) {
             while(rs.next()) {
@@ -135,9 +139,11 @@ public class PedidoDAO implements DAO<Pedido>{
                 }
                 StatusPedido status = (StatusPedido)classe.newInstance();
                 pedido.setStatusPedido(status);
-                lista.add(pedido);
+                pedidos.add(pedido);
             }
-            return lista;
+            return pedidos.stream()
+                    .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                    .collect(Collectors.toList());
         }catch(SQLException e) {
             throw new DAOException("Erro buscando todas as roupas: "+QUERY_BUSCAR_TODOS, e);
         } catch (InstantiationException ex) {
@@ -153,7 +159,7 @@ public class PedidoDAO implements DAO<Pedido>{
         try(PreparedStatement st = con.prepareStatement(QUERY_INSERIR, Statement.RETURN_GENERATED_KEYS)){
             st.setDate(1, Date.valueOf(pedido.getOrcamento().getPrazo()));
             st.setDouble(2, pedido.getOrcamento().getValor().doubleValue());
-            st.setString(3, pedido.getStatusPedido().status());
+            st.setString(3, pedido.getStatusPedido().getClass().getSimpleName());
             st.setTimestamp(4, Timestamp.valueOf(pedido.getDataCriacao()));
             
             st.executeUpdate();
@@ -178,7 +184,7 @@ public class PedidoDAO implements DAO<Pedido>{
         try(PreparedStatement st = con.prepareStatement(QUERY_ATUALIZAR)){
             st.setDate(1, Date.valueOf(pedido.getOrcamento().getPrazo()));
             st.setDouble(2, pedido.getOrcamento().getValor().doubleValue());
-            st.setString(3,pedido.getStatusPedido().status());
+            st.setString(3,pedido.getStatusPedido().getClass().getSimpleName());
             st.setTimestamp(4, Timestamp.valueOf(pedido.getDataCriacao()));
             st.setInt(5, pedido.getNumero());
             

@@ -60,6 +60,9 @@ public class main {
                     
                     PedidoDAO pedidoDAO = new PedidoDAO(conn);
                     pedidoDAO.inserir(pedido);
+                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getName());
+                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getSimpleName());
+                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getCanonicalName());
                     
                     System.out.println("Lista: "+pedidoDAO.buscarPorStatus(new EmAnalise()));
                 } catch (SQLException ex) {
@@ -67,6 +70,8 @@ public class main {
                 } catch (Exception ex) {
                     Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                
               
 //              roupaDAO.inserir(roupa);
 //              

@@ -6,7 +6,7 @@ public class EmAberto extends StatusPedido {
     
     @Override
     public String status(){
-        return "EmAberto";
+        return "Em Aberto";
     }
     
     @Override

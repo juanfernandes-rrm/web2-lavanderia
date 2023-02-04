@@ -6,7 +6,7 @@ package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
-import br.com.tads.model.BancoDeDados;
+import br.com.tads.model.Pedido;
 import br.com.tads.model.status.EmAberto;
 import br.com.tads.model.status.StatusPedido;
 import jakarta.servlet.ServletException;
@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,7 +39,8 @@ public class PedidoFilter implements Action{
         try(ConnectionFactory factory = new ConnectionFactory()) {
             Connection conn = factory.getConnection();
             PedidoDAO pedidoDAO = new PedidoDAO(conn);
-            request.setAttribute("listPedido", pedidoDAO.buscarPorStatus(statusPedido));
+            List<Pedido> pedidos = pedidoDAO.buscarPorStatus(statusPedido);        
+            request.setAttribute("listPedido", pedidos);
         } catch (Exception ex) {
             Logger.getLogger(PedidoFilter.class.getName()).log(Level.SEVERE, null, ex);
         }

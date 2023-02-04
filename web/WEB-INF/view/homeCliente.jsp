@@ -120,7 +120,7 @@
                             </div>
                             <div class="text-end">
                                 <c:if test="${pedido.statusPedido.status() != 'Rejeitado'
-                                              &&  pedido.statusPedido.status() != 'EmAnalise'
+                                              &&  pedido.statusPedido.status() != 'Em Análise'
                                               &&  pedido.statusPedido.status() != 'Cancelado'
                                               &&  pedido.statusPedido.status() != 'Finalizado'}">
                                     <a href="controller?action=PedidoStatus&status=Cancelar&id=${pedido.numero}" class="btn btn-danger">Cancelar pedido</a>

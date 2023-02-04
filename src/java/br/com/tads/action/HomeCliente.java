@@ -6,7 +6,6 @@ package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
-import br.com.tads.model.BancoDeDados;
 import br.com.tads.model.Pedido;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

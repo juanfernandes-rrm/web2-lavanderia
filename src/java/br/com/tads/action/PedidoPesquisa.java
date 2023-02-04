@@ -6,7 +6,6 @@ package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
-import br.com.tads.model.BancoDeDados;
 import br.com.tads.model.Pedido;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,9 +28,9 @@ public class PedidoPesquisa implements Action{
         
         try(ConnectionFactory factory = new ConnectionFactory()) {
             PedidoDAO pedidoDAO = new PedidoDAO(factory.getConnection());
-            List<Pedido> pedido = new ArrayList<>();
-            pedido.add(pedidoDAO.buscar(pedidoId));
-            request.setAttribute("listPedido", pedido);
+            List<Pedido> pedidos = new ArrayList<>();
+            pedidos.add(pedidoDAO.buscar(pedidoId));
+            request.setAttribute("listPedido", pedidos);
         }catch (Exception ex) {
             Logger.getLogger(PedidoPesquisa.class.getName()).log(Level.SEVERE, null, ex);
         }
