@@ -4,6 +4,8 @@
  */
 package br.com.tads.action;
 
+import br.com.tads.connection.ConnectionFactory;
+import br.com.tads.dao.PedidoDAO;
 import br.com.tads.model.BancoDeDados;
 import br.com.tads.model.status.EmAberto;
 import br.com.tads.model.status.StatusPedido;
@@ -11,6 +13,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +25,7 @@ public class PedidoFilter implements Action{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String status = request.getParameter("status");
+        
         String nomeDaClasse = "br.com.tads.model.status."+status;
         StatusPedido statusPedido = new EmAberto();
         try {
@@ -28,7 +34,14 @@ public class PedidoFilter implements Action{
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException  e) {
             throw new ServletException(e);
         }
-        request.setAttribute("listPedido", BancoDeDados.getPedidoPorStatus(statusPedido));
+        
+        try(ConnectionFactory factory = new ConnectionFactory()) {
+            Connection conn = factory.getConnection();
+            PedidoDAO pedidoDAO = new PedidoDAO(conn);
+            request.setAttribute("listPedido", pedidoDAO.buscarPorStatus(statusPedido));
+        } catch (Exception ex) {
+            Logger.getLogger(PedidoFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "forward:homeCliente.jsp";
     }
     
