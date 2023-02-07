@@ -37,7 +37,7 @@ public class AutorizacaoFilter extends HttpFilter implements Filter {
 		String action = request.getParameter("action");
 		
 		boolean usuarioLogado = (usuario!=null);
-		boolean actionProtegida = !(action.equals("LoginForm") || action.equals("Login"));
+		boolean actionProtegida = !(action.equals("LoginForm") || action.equals("Login") || action.equals("CadastroForm") || action.equals("Cadastro"));
 		
 		if(!usuarioLogado && actionProtegida) {
                     response.sendRedirect("controller?action=LoginForm"); 

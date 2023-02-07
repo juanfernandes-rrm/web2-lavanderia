@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Cliente extends Usuario{
     private List<Pedido> pedidos = new ArrayList<>();
+
+    public Cliente(){};
     
-    public Cliente(String nome, String senha) {
-        this.nome = nome;
-        this.senha = senha;
+    public Cliente(String cpf, String nome, String email, Endereco endereco, String telefone, String senha) {
+        super(cpf, nome, email, endereco, telefone, senha);
     }
-    
+
     
     
 }

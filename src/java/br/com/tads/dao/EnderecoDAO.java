@@ -17,8 +17,9 @@ public class EnderecoDAO implements DAO<Endereco>{
 
     private Connection con = null;
 
-    private static final String QUERY_INSERIR= "INSERT INTO endereco(cidade, estado) VALUES (?, ?)";
-    private static final String QUERY_BUSCAR_TODOS= "SELECT id, cidade, estado FROM endereco";
+    private static final String QUERY_INSERIR= "INSERT INTO endereco(estado, cidade, bairro, rua, numero) VALUES (?, ?, ?, ?, ?)";
+    private static final String QUERY_BUSCAR= "SELECT id, estado, cidade, bairro, rua, numero FROM endereco WHERE endereco.id = ?";
+    private static final String QUERY_BUSCAR_TODOS= "SELECT id, estado, cidade, bairro, rua, numero FROM endereco";
     
     public EnderecoDAO(Connection con) throws DAOException{
         if(con== null){
@@ -28,7 +29,26 @@ public class EnderecoDAO implements DAO<Endereco>{
     }
     @Override
     public Endereco buscar(long id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Endereco endereco = new Endereco();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR)) {
+            stmt.setInt(1, (int) id);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                if (rs.next()) {
+                    endereco.setId(rs.getInt("id"));
+                    endereco.setEstado(rs.getString("estado"));
+                    endereco.setCidade(rs.getString("cidade"));
+                    endereco.setBairro(rs.getString("bairro"));
+                    endereco.setRua(rs.getString("rua"));
+                    endereco.setNumero(rs.getString("numero"));
+                } else {
+                    System.out.println("No object found with id " + id);
+                }
+
+              }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+        return endereco;
     }
 
     @Override
@@ -39,8 +59,11 @@ public class EnderecoDAO implements DAO<Endereco>{
     @Override
     public void inserir(Endereco endereco) throws DAOException {
         try(PreparedStatement st = con.prepareStatement(QUERY_INSERIR, Statement.RETURN_GENERATED_KEYS)){
-            st.setString(1, endereco.getCidade());
-            st.setString(2, endereco.getEstado());
+            st.setString(1, endereco.getEstado());
+            st.setString(2, endereco.getCidade());
+            st.setString(3, endereco.getBairro());
+            st.setString(4, endereco.getRua());
+            st.setString(5, endereco.getNumero());
             
             st.executeUpdate();
             
@@ -49,7 +72,7 @@ public class EnderecoDAO implements DAO<Endereco>{
                     endereco.setId(generatedKeys.getInt(1));
                 }
                 else {
-                    throw new SQLException("Criação de endereço falhou.");
+                    throw new SQLException("Cadastro de endereço falhou.");
                 }
             }
         }catch(SQLException e) {

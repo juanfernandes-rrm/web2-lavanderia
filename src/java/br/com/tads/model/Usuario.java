@@ -1,6 +1,7 @@
 package br.com.tads.model;
 
 public abstract class Usuario {
+    protected int id;
     protected String cpf;
     protected String nome;
     protected String email;
@@ -8,6 +9,26 @@ public abstract class Usuario {
     protected String telefone;
     protected String senha;
 
+    public Usuario() {
+    }
+    
+    public Usuario(String cpf, String nome, String email, Endereco Endereco, String telefone, String senha) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.Endereco = Endereco;
+        this.telefone = telefone;
+        this.senha = senha;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getCpf() {
         return cpf;
     }

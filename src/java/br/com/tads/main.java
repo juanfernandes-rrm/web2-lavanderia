@@ -1,21 +1,8 @@
 package br.com.tads;
 
-import java.sql.Connection;
-import br.com.tads.connection.ConnectionFactory;
-import br.com.tads.dao.PedidoDAO;
-import br.com.tads.dao.RoupaDAO;
 import br.com.tads.exceptions.DAOException;
-import br.com.tads.model.Orcamento;
-import br.com.tads.model.Peca;
-import br.com.tads.model.Pedido;
-import br.com.tads.model.Roupa;
-import br.com.tads.model.status.EmAnalise;
-import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.com.tads.model.utils.RandomPassword;
+import br.com.tads.sendmail.Mail;
 
 public class main {
     public static void main(String[] args) throws DAOException {
@@ -44,35 +31,33 @@ public class main {
 //            clienteDAO.inserir(cliente);
 
 //              Roupa roupa = new Roupa("CAMISETA",5.0,2);
-                try(ConnectionFactory factory = new ConnectionFactory()){
-                    Connection conn = factory.getConnection();
-                    RoupaDAO roupaDAO = new RoupaDAO(conn);
-                    Roupa roupa = roupaDAO.buscar(2);
-                    Peca peca = new Peca(roupa, 3);
-                    
-                    Orcamento orcamento = new Orcamento();
-                    orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
-                    orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()).multiply(BigDecimal.valueOf(3)));
-                    
-                    Pedido pedido = new Pedido();
-                    pedido.setOrcamento(orcamento);
-                    pedido.adicionarPeca(peca);
-                    
-                    PedidoDAO pedidoDAO = new PedidoDAO(conn);
-                    pedidoDAO.inserir(pedido);
-                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getName());
-                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getSimpleName());
-                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getCanonicalName());
-                    
-                    System.out.println("Lista: "+pedidoDAO.buscarPorStatus(new EmAnalise()));
-                } catch (SQLException ex) {
-                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception ex) {
-                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
-              
+//                try(ConnectionFactory factory = new ConnectionFactory()){
+//                    Connection conn = factory.getConnection();
+//                    RoupaDAO roupaDAO = new RoupaDAO(conn);
+//                    Roupa roupa = roupaDAO.buscar(2);
+//                    Peca peca = new Peca(roupa, 3);
+//                    
+//                    Orcamento orcamento = new Orcamento();
+//                    orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
+//                    orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()).multiply(BigDecimal.valueOf(3)));
+//                    
+//                    Pedido pedido = new Pedido();
+//                    pedido.setOrcamento(orcamento);
+//                    pedido.adicionarPeca(peca);
+//                    
+//                    PedidoDAO pedidoDAO = new PedidoDAO(conn);
+//                    pedidoDAO.inserir(pedido);
+//                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getName());
+//                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getSimpleName());
+//                    System.out.println("Class: "+pedido.getStatusPedido().getClass().getCanonicalName());
+//                    
+//                    System.out.println("Lista: "+pedidoDAO.buscarPorStatus(new EmAnalise()));
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+               
 //              roupaDAO.inserir(roupa);
 //              
 //              Orcamento orcamento = new Orcamento();
@@ -95,5 +80,10 @@ public class main {
 //              roupas.stream().forEach(r -> {
 //                  System.out.println(r.getPeca());
 //              });
+
+    Mail mail = new Mail("juanfernandesrrm@gmail.com","Titulo",RandomPassword.generateRandomPassword(25));
+    mail.send();
+        
+        
     }
 }
