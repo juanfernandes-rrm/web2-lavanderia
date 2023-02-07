@@ -22,6 +22,7 @@
                 <span class="navbar-brand mb-0 h1">LOL</span>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=HomeCliente">Home</a></li>
                         <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=PedidoForm">Fazer pedido</a></li>
                         <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=Logout">Sair</a></li>
                     </ul>
@@ -32,12 +33,8 @@
         <div class="text-center my-3 mt-1">
             <h1>Orçamentos</h1>
         </div>
-        
-        <div class="container text-end col-7">
-            <div class="mb-3">
-                <a href="controller?action=HomeCliente" class="btn btn-primary">Home</a> 
-            </div>
 
+        <div class="container text-end col-7">
             <c:forEach var="pedido" items="${listPedidosEmAnalise}">
                 <div class="card mb-3">
                     <div class="card-header text-center">
@@ -83,8 +80,7 @@
                     </div>
                 </div>
             </c:forEach>
-
-        </div>
+        </div>    
     </body>
 </html>
 

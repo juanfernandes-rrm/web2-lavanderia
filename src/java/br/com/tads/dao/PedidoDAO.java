@@ -6,6 +6,7 @@ package br.com.tads.dao;
 
 import br.com.tads.action.Action;
 import br.com.tads.exceptions.DAOException;
+import br.com.tads.model.Cliente;
 import br.com.tads.model.Orcamento;
 import br.com.tads.model.Peca;
 import br.com.tads.model.Pedido;
@@ -33,9 +34,9 @@ public class PedidoDAO implements DAO<Pedido>{
 
     private Connection con = null;
 
-    private static final String QUERY_INSERIR= "INSERT INTO pedido(prazo, valor_total, status_pedido, data_criacao) VALUES (?, ?, ?, ?)";
+    private static final String QUERY_INSERIR= "INSERT INTO pedido(prazo, valor_total, status_pedido, data_criacao, cliente_fk) VALUES (?, ?, ?, ?, ?)";
     private static final String QUERY_INSERIR_ROUPA = "INSERT INTO roupa_pedido(pedido_fk, roupa_fk, qtd_peca) VALUES (?, ?, ?)";
-    private static final String QUERY_BUSCAR_TODOS= "SELECT numero, prazo, valor_total, status_pedido, data_criacao FROM pedido";
+    private static final String QUERY_BUSCAR_TODOS= "SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido";
         private static final String QUERY_ATUALIZAR = "UPDATE pedido SET prazo = ?, valor_total = ?, status_pedido = ?, data_criacao = ? WHERE numero = ?";
     
     public PedidoDAO(Connection con) throws DAOException{
@@ -48,7 +49,7 @@ public class PedidoDAO implements DAO<Pedido>{
     @Override
     public Pedido buscar(long id) throws DAOException {
         Pedido pedido = new Pedido();
-        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao FROM pedido WHERE pedido.numero = ?")) {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido WHERE pedido.numero = ?")) {
             stmt.setInt(1, (int) id);
             try (ResultSet rs = stmt.executeQuery()) { 
                 if (rs.next()) {
@@ -66,6 +67,7 @@ public class PedidoDAO implements DAO<Pedido>{
                     }
                     StatusPedido status = (StatusPedido)classe.newInstance();
                     pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
                 } else {
                     System.out.println("No object found with id " + id);
                 }
@@ -81,10 +83,10 @@ public class PedidoDAO implements DAO<Pedido>{
         return pedido;
     }
     
-    //TODO: esse método
+    //Pedidos de todo os clientes (Para Funcionários)
     public List<Pedido> buscarPorStatus(StatusPedido statusPedido) throws DAOException {
         List<Pedido> pedidos = new ArrayList<>();
-        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao FROM pedido WHERE pedido.status_pedido = ?")) {
+        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido WHERE pedido.status_pedido = ?")) {
             stmt.setString(1, statusPedido.getClass().getSimpleName());
             try (ResultSet rs = stmt.executeQuery()) { 
                 while (rs.next()) {
@@ -102,7 +104,44 @@ public class PedidoDAO implements DAO<Pedido>{
                     }
                     StatusPedido status = (StatusPedido)classe.newInstance();
                     pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
+                    pedidos.add(pedido);
+                }
+              } catch (InstantiationException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+        return pedidos.stream()
+                    .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                    .collect(Collectors.toList());
+    }
+    
+    public List<Pedido> buscarPorStatus(StatusPedido statusPedido, int idCliente) throws DAOException {
+        List<Pedido> pedidos = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido WHERE pedido.status_pedido = ? AND pedido.cliente_fk = ?")) {
+            stmt.setString(1, statusPedido.getClass().getSimpleName());
+            stmt.setInt(2, idCliente);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                while (rs.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setNumero(rs.getInt("numero"));
+                    pedido.setDataCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                    pedido.setOrcamento(new Orcamento(BigDecimal.valueOf(rs.getDouble("valor_total")),
+                                        rs.getDate("prazo").toLocalDate()));
                     
+                    Class classe = null;
+                    try {
+                        classe = Class.forName("br.com.tads.model.status."+rs.getString("status_pedido"));
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    StatusPedido status = (StatusPedido)classe.newInstance();
+                    pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
                     pedidos.add(pedido);
                 }
               } catch (InstantiationException ex) {
@@ -139,6 +178,7 @@ public class PedidoDAO implements DAO<Pedido>{
                 }
                 StatusPedido status = (StatusPedido)classe.newInstance();
                 pedido.setStatusPedido(status);
+                pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
                 pedidos.add(pedido);
             }
             return pedidos.stream()
@@ -154,6 +194,42 @@ public class PedidoDAO implements DAO<Pedido>{
         return null;
     }
 
+    public List<Pedido> buscarTodos(int idCliente) throws DAOException, SQLException {
+        List<Pedido> pedidos = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement("SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido WHERE pedido.cliente_fk = ?")) {
+            stmt.setInt(1, idCliente);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                while (rs.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setNumero(rs.getInt("numero"));
+                    pedido.setDataCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                    pedido.setOrcamento(new Orcamento(BigDecimal.valueOf(rs.getDouble("valor_total")),
+                                        rs.getDate("prazo").toLocalDate()));
+                    
+                    Class classe = null;
+                    try {
+                        classe = Class.forName("br.com.tads.model.status."+rs.getString("status_pedido"));
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    StatusPedido status = (StatusPedido)classe.newInstance();
+                    pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
+                    
+                    pedidos.add(pedido);
+                }
+                return pedidos;
+            } catch (InstantiationException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+        return null;
+    }
+    
     @Override
     public void inserir(Pedido pedido) throws DAOException {
         try(PreparedStatement st = con.prepareStatement(QUERY_INSERIR, Statement.RETURN_GENERATED_KEYS)){
@@ -161,6 +237,7 @@ public class PedidoDAO implements DAO<Pedido>{
             st.setDouble(2, pedido.getOrcamento().getValor().doubleValue());
             st.setString(3, pedido.getStatusPedido().getClass().getSimpleName());
             st.setTimestamp(4, Timestamp.valueOf(pedido.getDataCriacao()));
+            st.setInt(5, pedido.getCliente().getId());
             
             st.executeUpdate();
             
@@ -213,5 +290,10 @@ public class PedidoDAO implements DAO<Pedido>{
                 e.printStackTrace();
             }
         });   
+    }
+
+    private Cliente buscaCliente(int id) throws DAOException {
+        UsuarioDAO usuarioDAO = new UsuarioDAO(con);
+        return (Cliente) usuarioDAO.buscarCliente(id);
     }
 }

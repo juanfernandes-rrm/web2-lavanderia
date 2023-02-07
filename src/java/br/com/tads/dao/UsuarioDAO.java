@@ -26,6 +26,8 @@ public class UsuarioDAO implements DAO<Usuario>{
     private static final String QUERY_INSERIR= "INSERT INTO usuario(cpf, nome, email, endereco_fk, telefone, senha) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String QUERY_BUSCAR= "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
                                                 + "WHERE usuario.email = ? AND usuario.senha = ?";
+    private static final String QUERY_BUSCAR_POR_ID = "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
+                                                + "WHERE usuario.id = ?";
     
     public UsuarioDAO(Connection con) throws DAOException{
         if(con== null){
@@ -39,6 +41,30 @@ public class UsuarioDAO implements DAO<Usuario>{
         try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR)) {
             stmt.setString(1, login);
             stmt.setString(2, senha);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                if (rs.next()) {
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setEndereco(buscaEndereco(rs.getInt("endereco_fk")));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    return usuario;
+                } else {
+                    System.out.println("No object found" );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public Usuario buscarCliente(int id) throws DAOException {
+        Usuario usuario = new Cliente();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_POR_ID)) {
+            stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) { 
                 if (rs.next()) {
                     usuario.setId(rs.getInt("id"));

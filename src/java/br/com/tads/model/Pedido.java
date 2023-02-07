@@ -15,7 +15,7 @@ public class Pedido implements Serializable{
     private StatusPedido statusPedido;
     private LocalDateTime dataCriacao;
     private List<Peca> pecas;
-
+    private Cliente cliente;
 
     public Pedido() {
         this.statusPedido = new EmAnalise();
@@ -49,6 +49,14 @@ public class Pedido implements Serializable{
 
     public List<Peca> getPecas() {
         return pecas;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void adicionarPeca(Peca pecas) {

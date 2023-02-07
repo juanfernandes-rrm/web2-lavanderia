@@ -17,7 +17,7 @@
                 <span class="navbar-brand mb-0 h1">LOL</span>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-2 mt-1" href="controller?action=HomeFuncionario">Home</a></li>
+                        <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=OrcamentoLista">Meus Orçamentos</a></li>
                         <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=PedidoForm">Fazer pedido</a></li>
                         <li class="nav-item"><a class="me-lg-2 mt-1 btn btn-primary" href="controller?action=Logout">Sair</a></li>
                     </ul>
@@ -31,25 +31,6 @@
 
         <div class="container text-end col-7">
             <div class="mb-3 mt-3">
-                
-<!--                <div class="btn-group align-content-center mb-3" role="group">       
-                <button class="btn btn-outline-secondary">Todos</button>
-                <button class="btn btn-outline-secondary">Pedidos de Hoje</button>
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Período</button>
-                    <div class="dropdown-menu px-4 py-3">
-                        <form method="POST" action="/é o DAO">   Implementar DAO 
-                            <div class="mb-3">
-                                <label for="inicio">Início:</label></br>
-                                <input type="date" id="iniData" name="iniData">
-                            </div>
-                            <div class="mb-3">
-                                <label for="fim">Fim:</label></br>
-                                <input type="date" id="fimData" name="fimData"></br>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Pesquisar</button>
-                        </form>
-                    </div>
-                </div>-->
 
                 <form action="controller?action=PedidoPesquisa" method="POST">
                     <div class="input-group mb-3">

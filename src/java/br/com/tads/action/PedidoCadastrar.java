@@ -8,6 +8,7 @@ import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
 import br.com.tads.dao.RoupaDAO;
 import br.com.tads.exceptions.DAOException;
+import br.com.tads.model.Cliente;
 import br.com.tads.model.Orcamento;
 import br.com.tads.model.Peca;
 import br.com.tads.model.Pedido;
@@ -15,6 +16,7 @@ import br.com.tads.model.Roupa;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Enumeration;
@@ -54,6 +56,10 @@ public class PedidoCadastrar implements Action{
                     orcamento.setPrazo(LocalDate.now().plusDays(roupa.getPrazoEntrega()));
                     orcamento.somaValor(BigDecimal.valueOf(roupa.getValor()).multiply(BigDecimal.valueOf(qtd)));
                     
+                    HttpSession session = request.getSession();
+                    Cliente cliente = (Cliente) session.getAttribute("usuario");
+                    
+                    pedido.setCliente(cliente);
                     pedido.setOrcamento(orcamento);
                     pedido.adicionarPeca(peca);
                     
