@@ -32,6 +32,11 @@
                             </div>
                             
                             <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP">
+                            </div>
+                            
+                            <div class="form-group">
                                 <label for="estado">Estado</label>
                                 <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado">
                             </div>
@@ -70,4 +75,7 @@
         </div>
     </div>
     </body>
+   
+    <script type="text/javascript" src="static/js/viacep-webservice.js"></script>
+    
 </html>
