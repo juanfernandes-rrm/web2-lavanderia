@@ -4,7 +4,6 @@
     Author     : Felipe
 --%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -26,17 +25,19 @@
         </nav>
         <div class="container" style="margin-top: 1rem">
             <div class="btn-group align-content-center" role="group"> 
-                <form method="POST" action="controller?action=PedidoController">
+                <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
+                    <input type="hidden" name="origin" value="visualPedidos.jsp">
                     <input type="hidden" name="filtro" value="todos">
                     <button type="submit" class="btn btn-outline-secondary">Todos</button>
                 </form>
-                <form method="POST" action="controller?action=PedidoController">
+                <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
+                    <input type="hidden" name="origin" value="visualPedidos.jsp">
                     <input type="hidden" name="filtro" value="hoje">
                     <button type="submit" class="btn btn-outline-secondary">Pedidos de Hoje</button>
                 </form>    
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Período</button>
                     <div class="dropdown-menu px-4 py-3">
-                        <form method="POST" action="controller?action=PedidoController">
+                        <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
                             <div class="mb-3">
                                 <label for="inicio">Início:</label></br>
                                 <input type="date" id="iniData" name="iniData">
@@ -45,6 +46,7 @@
                                 <label for="fim">Fim:</label></br>
                                 <input type="date" id="fimData" name="fimData"></br>
                             </div>
+                            <input type="hidden" name="origin" value="visualPedidos.jsp">
                             <input type="hidden" name="filtro" value="range">
                             <button type="submit" class="btn btn-secondary">Pesquisar</button>
                         </form>
@@ -52,9 +54,6 @@
             </div>    
         </div>
 
-        <c:set var="origin" value="visualPedidos.jsp" />
-        <c:set var="controller" value="new PedidoFuncionarioFiltro()" />
-        <c:set var="result" value="${controller.execute(request, response)}" />
         <c:set var="pedidos" value="${requestScope.pedidos}" />
        
         

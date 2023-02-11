@@ -5,7 +5,6 @@
 --%>
 
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="br.com.tads.model.PedidoTeste" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -23,22 +22,28 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterRoupas">Cadastro de Itens</a></li>
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterFuncionario">Manter Funcionário</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=VisualPedidos">Visualização de pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=PedidoFuncionarioFiltro">Visualização de pedidos</a></li>
                     </ul>
                      <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
                 </div>
             </div>
-        </nav>
+        </nav> 
         
-        <c:set var="origin" value="homeFuncionario.jsp" />
-        <c:set var="controller" value="new PedidoFuncionarioFiltro()" />
-        <c:set var="result" value="${controller.execute(request, response)}" />
         <c:set var="pedidos" value="${requestScope.pedidos}" />
         
         <div class="container" style="margin-top:100px">
+         <div class="container" style="margin-bottom: 1rem">
+            <div class="btn-group align-content-center" role="group"> 
+                <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
+                    <input type="hidden" name="filtro" value="todos">
+                    <input type="hidden" name="origin" value="homeFuncionario.jsp">
+                    <button type="submit" class="btn btn-outline-secondary">Listar</button>
+                </form>
+            </div>
+         </div>
             <div class="card">
                 <div class="card-body"> 
-                    <form action="controller?action=PedidoController" method="post">
+                    <form action="controller?action=PedidoFuncionarioFiltro" method="post">
                         <table class="table">
                             <thead class="table-primary">
                               <tr>
@@ -69,7 +74,5 @@
                 </div>
             </div>
         </div>
-    </body>
-    
-    
+    </body> 
 </html>
