@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ConnectionFactory implements AutoCloseable{
 	
     private static String DRIVER = "org.postgresql.Driver";
-    private static String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=lavanderia";
+    private static String URL = "jdbc:postgresql://localhost:5432/postgres?currentSchema=lavanderia&characterEncoding=UTF-8";
     private static String LOGIN = "postgres";
     private static String SENHA = "root";
     
