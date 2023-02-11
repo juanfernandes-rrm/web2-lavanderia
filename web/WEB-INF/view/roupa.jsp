@@ -26,6 +26,11 @@
     </head>
     <body>        
         <div class="container pt-3">
+            
+            <c:if test="${mensagem} != null">
+                <c:out value="${mensagem}" />
+            </c:if>
+            
             <div>
                 <h1>Roupas cadastradas</h1>
             </div>
@@ -50,8 +55,8 @@
                                 <td>${roupa.valor}</td>
                                 <td>${roupa.prazoEntrega}</td>
                                 <td><a href="#" class="btn btn-secondary">editar</a></td>
-                                <td><a href="#" class="btn btn-danger">excluir</a></td>
-                            </tr> 
+                                <td><a href="controller?action=RoupaDeletar&id=${roupa.id}" class="btn btn-danger">excluir</a></td>
+                            </tr>                         
                         </c:forEach>
                     </tbody>
                 </table>
@@ -81,6 +86,6 @@
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
             </form>
-        </div>    
+        </div> 
     </body>
 </html>

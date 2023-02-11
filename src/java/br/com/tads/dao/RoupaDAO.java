@@ -15,6 +15,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.postgresql.util.PSQLException;
 
 /**
  *
@@ -27,6 +30,7 @@ public class RoupaDAO implements DAO<Roupa>{
     private static final String QUERY_INSERIR= "INSERT INTO roupa(peca, valor, prazo_entrega) VALUES (?, ?, ?)";
     private static final String QUERY_BUSCAR_TODOS= "SELECT id, peca, valor, prazo_entrega FROM roupa";
     private static final String QUERY_BUSCAR= "SELECT id, peca, valor, prazo_entrega FROM roupa WHERE roupa.id = ?";
+    private static final String QUERY_DELETE = "DELETE FROM roupa WHERE roupa.id = ?";
     
     public RoupaDAO(Connection con) throws DAOException{
         if(con== null){
@@ -104,8 +108,14 @@ public class RoupaDAO implements DAO<Roupa>{
     }
 
     @Override
-    public void remover(Roupa t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void remover(Roupa roupa) throws DAOException {
+        //TODO: adicionar tratamento de erro para quando nao poder excluir pois existem um pedido referenciando esta roupa (violation constraint fk)
+        try(PreparedStatement st = con.prepareStatement(QUERY_DELETE)){
+            st.setInt(1, roupa.getId());
+            st.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
