@@ -12,7 +12,6 @@ import br.com.tads.model.Endereco;
 import br.com.tads.model.Usuario;
 import java.sql.Connection;
 import br.com.tads.model.utils.RandomPassword;
-import br.com.tads.sendmail.Mail;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -40,15 +39,9 @@ public class Cadastro implements Action{
         
         System.out.println("Email: "+email);
         
-//        try{
-//            String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
-//            Mail mail = new Mail(email,"Lavanderia Online - Sua senha ",senha);
-//            mail.send();
-//        }catch(Exception e){
-//            System.out.println("Email não encontrado");
-//        }
+        String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
+//        SendMail.send(email,"Lavanderia Online - Sua senha ",senha);
         
-        String senha = RandomPassword.generateRandomPassword(25);
         Endereco endereco = new Endereco(estado,cidade, bairro, rua, numero);
         Usuario usuario = new Cliente(cpf, nome, email, endereco, telefone, senha);
 

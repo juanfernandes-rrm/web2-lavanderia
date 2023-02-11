@@ -2,7 +2,6 @@ package br.com.tads;
 
 import br.com.tads.exceptions.DAOException;
 import br.com.tads.model.utils.RandomPassword;
-import br.com.tads.sendmail.Mail;
 
 public class main {
     public static void main(String[] args) throws DAOException {
@@ -81,9 +80,9 @@ public class main {
 //                  System.out.println(r.getPeca());
 //              });
 
-    Mail mail = new Mail("juanfernandesrrm@gmail.com","Titulo",RandomPassword.generateRandomPassword(25));
-    mail.send();
-        
+
+                String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
+//                SendMail.send("juanfernandesrrm@gmail.com","Lavanderia Online - Sua senha ",senha);
         
     }
 }
