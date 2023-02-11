@@ -20,6 +20,7 @@ import java.sql.Statement;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +38,10 @@ public class PedidoDAO implements DAO<Pedido>{
     private static final String QUERY_INSERIR= "INSERT INTO pedido(prazo, valor_total, status_pedido, data_criacao, cliente_fk) VALUES (?, ?, ?, ?, ?)";
     private static final String QUERY_INSERIR_ROUPA = "INSERT INTO roupa_pedido(pedido_fk, roupa_fk, qtd_peca) VALUES (?, ?, ?)";
     private static final String QUERY_BUSCAR_TODOS= "SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido";
-        private static final String QUERY_ATUALIZAR = "UPDATE pedido SET prazo = ?, valor_total = ?, status_pedido = ?, data_criacao = ? WHERE numero = ?";
+    private static final String QUERY_ATUALIZAR = "UPDATE pedido SET prazo = ?, valor_total = ?, status_pedido = ?, data_criacao = ? WHERE numero = ?";
+    private static final String QUERY_ATUALIZAR_ESTADO = "UPDATE pedido SET status_pedido = ?, WHERE numero = ?";
+    private static final String QUERY_BUSCAR_POR_DATA = "SELECT * FROM pedido WHERE data_criacao BETWEEN ? AND ?";
+    private static final String QUERY_BUSCAR_POR_DATA_HOJE = "SELECT * FROM pedido WHERE data_criacao = ?";
     
     public PedidoDAO(Connection con) throws DAOException{
         if(con== null){
@@ -296,4 +300,105 @@ public class PedidoDAO implements DAO<Pedido>{
         UsuarioDAO usuarioDAO = new UsuarioDAO(con);
         return (Cliente) usuarioDAO.buscarCliente(id);
     }
+    
+    public void atualizarEstado(Pedido pedido, String estado) throws DAOException {
+        try(PreparedStatement st = con.prepareStatement(QUERY_ATUALIZAR_ESTADO)){
+            st.setString(1, estado);
+            st.setInt(2, pedido.getNumero());
+            
+            st.executeUpdate();
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public List<Pedido> buscarPedidosDeHoje() throws DAOException {
+        List<Pedido> pedidos = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        Timestamp hoje = new Timestamp(calendar.getTimeInMillis());
+
+        try (PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_POR_DATA_HOJE)) {
+            st.setTimestamp(1, hoje);
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setNumero(rs.getInt("numero"));
+                    pedido.setDataCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                    pedido.setOrcamento(new Orcamento(BigDecimal.valueOf(rs.getDouble("valor_total")),
+                            rs.getDate("prazo").toLocalDate()));
+
+                    Class classe = null;
+                    try {
+                        classe = Class.forName("br.com.tads.model.status." + rs.getString("status_pedido"));
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    StatusPedido status = (StatusPedido) classe.newInstance();
+                    pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
+                    pedidos.add(pedido);
+                }
+                return pedidos.stream()
+                        .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                        .collect(Collectors.toList());
+            } catch (SQLException e) {
+                throw new DAOException("Erro buscando todas as roupas: " + QUERY_BUSCAR_POR_DATA_HOJE, e);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Erro buscando todas as roupas: " + QUERY_BUSCAR_POR_DATA_HOJE, e);
+        }
+        return null;
+    }
+
+    public List<Pedido> buscarPedidosPorData(Date ini, Date fin) throws DAOException {
+        List<Pedido> pedidos = new ArrayList<>();
+        try (PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_POR_DATA)) {
+            st.setTimestamp(1, new Timestamp(ini.getTime()));
+            st.setTimestamp(2, new Timestamp(fin.getTime()));
+
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setNumero(rs.getInt("numero"));
+                    pedido.setDataCriacao(rs.getTimestamp("data_criacao").toLocalDateTime());
+                    pedido.setOrcamento(new Orcamento(BigDecimal.valueOf(rs.getDouble("valor_total")),
+                            rs.getDate("prazo").toLocalDate()));
+
+                    Class classe = null;
+                    try {
+                        classe = Class.forName("br.com.tads.model.status." + rs.getString("status_pedido"));
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    StatusPedido status = (StatusPedido) classe.newInstance();
+                    pedido.setStatusPedido(status);
+                    pedido.setCliente(buscaCliente(rs.getInt("cliente_fk")));
+                    pedidos.add(pedido);
+                }
+                return pedidos.stream()
+                        .sorted(Comparator.comparing(Pedido::getDataCriacao).reversed())
+                        .collect(Collectors.toList());
+            } catch (SQLException e) {
+                throw new DAOException("Error searching for all orders: " + QUERY_BUSCAR_POR_DATA, e);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Error creating prepared statement: " + QUERY_BUSCAR_POR_DATA, e);
+        }
+        return null;
+    }
+
+    public Pedido buscarPedidosPorData(java.util.Date iniData, java.util.Date fimData) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
