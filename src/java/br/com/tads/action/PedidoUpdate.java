@@ -24,8 +24,24 @@ public class PedidoUpdate implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Object originAttribute = request.getAttribute("origin");
+        String origin = "forward:homeFuncionario.jsp";
+        if (originAttribute != null) {
+            origin = originAttribute.toString();
+        }
+        String returnPage;
+        if ("homeFuncionario.jsp".equals(origin)) {
+        returnPage = "forward:homeFuncionario.jsp";
+        } else {
+        returnPage = "forward:visualPedidos.jsp";
+        }
         
-        long id = Integer.parseInt(request.getParameter("pedido"));
+        String pedidoString = request.getParameter("pedido");
+        if (pedidoString == null) {
+            return returnPage;
+        }
+        long id = Integer.parseInt(pedidoString);
         String acao = request.getParameter("acao");
         List<Pedido> pedidos = (List<Pedido>) request.getAttribute("pedidos");
         
@@ -52,14 +68,6 @@ public class PedidoUpdate implements Action {
               } catch (Exception ex) {
                 Logger.getLogger(ex.getMessage());
             }
-        }
-        
-        String origin = request.getAttribute("origin").toString();
-        String returnPage;
-        if ("homeFuncionario.jsp".equals(origin)) {
-        returnPage = "forward:homeFuncionario.jsp";
-        } else {
-        returnPage = "forward:visualPedidos.jsp";
         }
 
         return returnPage;
