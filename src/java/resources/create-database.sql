@@ -15,6 +15,7 @@ create table usuario(
 	endereco_fk bigint,
 	telefone varchar(15),
 	senha varchar(150),
+	isCliente boolean not null,
 	foreign key (endereco_fk) references endereco(id)
 );
 
