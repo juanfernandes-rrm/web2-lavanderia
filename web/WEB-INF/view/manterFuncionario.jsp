@@ -97,9 +97,17 @@
         </div>
     </div>
 
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------->       
-
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        
         <div class="container" style="margin-top:2em">
+            <c:set var="mensagem" value="${requestScope.mensagem}" />
+
+            <c:if test="${not empty mensagem}">
+                <div class="alert alert-warning text-center" role="alert">
+                    ${mensagem}
+                </div>
+                <c:remove var="mensagem" scope="request"/>
+            </c:if>
             <div class="card">               
                 <div class="card-body" style="margin-bottom:1em">
                     <form class="row g-0" method="POST" action="controller?action=ListarFuncionario">
@@ -116,23 +124,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${not empty funcionarios}">
                             <c:forEach var="funcionario" items="${funcionarios}">
                               <tr>
                                 <td>${funcionario.nome}</td>
                                 <td>${funcionario.email}</td>
                                 <td>${funcionario.cpf}</td>
-                                <input type="hidden" name="id" value="${funcionario.id}"/>
-                                <td><a href="controller?action=EditarFuncionario" class="btn btn-secondary col-5">editar</a></td>
-                                <td><a href="controller?action=ExcluirFuncionario" class="btn btn-danger col-5">excluir</a></td>
+                                <td><a href="controller?action=EditarFuncionario&id=${funcionario.id}" class="btn btn-secondary col-5">editar</a></td>
+                                <td><a href="controller?action=ExcluirFuncionario&id=${funcionario.id}" 
+                                       class="btn btn-danger col-5" onclick="return confirm('Confirma exclusão do funcionario?');">excluir</a></td>
                               </tr> 
-                            </c:forEach>
-                        </c:if> 
-                        <c:if test="${empty funcionarios}">
-                            <div style="margin-top:1em" class="alert alert-danger" role="alert">
-                                <p>Lista de funcionarios vazia!</p>
-                            </div>
-                        </c:if>      
+                            </c:forEach> 
                         </tbody>
                     </table>
                 </div>

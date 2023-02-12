@@ -35,7 +35,7 @@ public class CadastroFuncionario implements Action{
         
         System.out.println("Email: "+email);
         
-        String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
+        String senha = RandomPassword.generateRandomPassword(25);
 //        SendMail.send(email,"Lavanderia Online - Sua senha ",senha);
         
         Endereco endereco = new Endereco(estado,cidade, bairro, rua, numero);
@@ -54,7 +54,7 @@ public class CadastroFuncionario implements Action{
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        request.setAttribute("mensagem", "Cadastrado com sucesso!");
         return "forward:login.jsp";
     }  
 }

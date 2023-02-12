@@ -5,15 +5,13 @@
 package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
-import br.com.tads.dao.UsuarioDAO;
+import br.com.tads.dao.FuncionarioDAO;
 import br.com.tads.model.Funcionario;
-import br.com.tads.model.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -25,14 +23,13 @@ public class ListarFuncionario implements Action {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try(ConnectionFactory factory = new ConnectionFactory()){
-            UsuarioDAO usuarioDAO = new UsuarioDAO(factory.getConnection());
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO(factory.getConnection());
             
-            List<Funcionario> funcionarios = usuarioDAO.buscarFuncionarios();
+            List<Funcionario> funcionarios = funcionarioDAO.buscarTodos();
             request.setAttribute("funcionarios", funcionarios);
         } catch (Exception ex) {
             Logger.getLogger(ex.getMessage());
         }
         return "forward:manterFuncionario.jsp";
-    }
-    
+    }  
 }

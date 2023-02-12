@@ -31,7 +31,9 @@ public class UsuarioDAO implements DAO<Usuario>{
                                                 + "WHERE usuario.email = ? AND usuario.senha = ?";
     private static final String QUERY_BUSCAR_POR_ID = "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
                                                 + "WHERE usuario.id = ?";
-    private static final String QUERY_BUSCAR_FUNCIONARIO = "SELECT * FROM usuario WHERE iscliente = 'false'";
+    private static final String QUERY_BUSCAR_FUNCIONARIO_POR_ID = "SELECT * FROM usuario WHERE id = ?";
+    private static final String QUERY_UPDATE = "UPDATE usuario SET cpf = ?, nome = ?, email = ?, endereco_fk = ?, telefone = ? WHERE id = ?";
+
     
     public UsuarioDAO(Connection con) throws DAOException{
         if(con== null){
@@ -119,7 +121,27 @@ public class UsuarioDAO implements DAO<Usuario>{
     
     @Override
     public Usuario buscar(long id) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Usuario usuario = new Funcionario();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_FUNCIONARIO_POR_ID)) {
+            stmt.setLong(1, id);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                if (rs.next()) {
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setEndereco(buscaEndereco(rs.getInt("endereco_fk")));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    return usuario;
+                } else {
+                    System.out.println("No object found" );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -158,8 +180,28 @@ public class UsuarioDAO implements DAO<Usuario>{
     }
 
     @Override
-    public void atualizar(Usuario t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void atualizar(Usuario usuario) throws DAOException {
+        try(PreparedStatement st = con.prepareStatement(QUERY_UPDATE, Statement.RETURN_GENERATED_KEYS)){
+            st.setString(1, usuario.getCpf());
+            st.setString(2, usuario.getNome());
+            st.setString(3, usuario.getEmail());
+            st.setInt(4, usuario.getEndereco().getId());
+            st.setString(5, usuario.getTelefone());
+            st.setInt(6, usuario.getId());
+            
+            st.executeUpdate();
+            
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    usuario.setId(generatedKeys.getInt(1));
+                }
+                else {
+                    throw new SQLException("Update do usuário falhou.");
+                }
+            }
+        }catch(SQLException e) {
+            throw new DAOException("Erro ao editar usuário: "+ QUERY_UPDATE + "/ "+ usuario.toString(), e);
+        }
     }
 
     @Override
@@ -170,29 +212,5 @@ public class UsuarioDAO implements DAO<Usuario>{
     private Endereco buscaEndereco(int id) throws DAOException {
         EnderecoDAO enderecoDAO = new EnderecoDAO(con);
         return enderecoDAO.buscar(id);
-    }
-    
-    public List<Funcionario> buscarFuncionarios() throws DAOException {
-        List<Funcionario> funcionarios = new ArrayList<>();
-        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_FUNCIONARIO)) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    Funcionario usuario = new Funcionario();
-                    usuario.setId(rs.getInt("id"));
-                    usuario.setCpf(rs.getString("cpf"));
-                    usuario.setNome(rs.getString("nome"));
-                    usuario.setEmail(rs.getString("email"));
-                    usuario.setEndereco(buscaEndereco(rs.getInt("endereco_fk")));
-                    usuario.setTelefone(rs.getString("telefone"));
-                    usuario.setSenha(rs.getString("senha"));
-                    funcionarios.add(usuario);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return funcionarios;
-    }
-
-    
+    }    
 }

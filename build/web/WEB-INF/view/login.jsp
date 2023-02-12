@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,9 +26,15 @@
                                 <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
                             </div>
                             <button type="submit" class="btn btn-primary btn-block mt-3">Logar</button>
-                            <a href="controller?action=CadastroForm" class="btn btn-secondary btn-block mt-3" role="button">Não possui login? Cadastre-se</a>
+                            <a href="controller?action=CadastroForm" class="btn btn-secondary btn-block mt-3" role="button">NÃ£o possui login? Cadastre-se</a>
                         </form>
                     </div>
+                    <c:if test="${mensagem != null && !mensagem.isEmpty()}">
+                      <div class="alert alert-success text-center" role="alert">
+                        ${mensagem}
+                      </div>
+                      <c:remove var="mensagem" scope="request"/>
+                    </c:if>
                 </div>
             </div>
         </div>
