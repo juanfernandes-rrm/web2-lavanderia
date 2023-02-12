@@ -19,6 +19,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -41,7 +43,7 @@ public class PedidoDAO implements DAO<Pedido>{
     private static final String QUERY_ATUALIZAR = "UPDATE pedido SET prazo = ?, valor_total = ?, status_pedido = ?, data_criacao = ? WHERE numero = ?";
     private static final String QUERY_ATUALIZAR_ESTADO = "UPDATE pedido SET status_pedido = ?, WHERE numero = ?";
     private static final String QUERY_BUSCAR_POR_DATA = "SELECT * FROM pedido WHERE data_criacao BETWEEN ? AND ?";
-    private static final String QUERY_BUSCAR_POR_DATA_HOJE = "SELECT * FROM pedido WHERE data_criacao = ?";
+    private static final String QUERY_BUSCAR_POR_DATA_HOJE = "SELECT * FROM pedido WHERE DATE(data_criacao) = ?";
     
     public PedidoDAO(Connection con) throws DAOException{
         if(con== null){
@@ -315,11 +317,10 @@ public class PedidoDAO implements DAO<Pedido>{
     
     public List<Pedido> buscarPedidosDeHoje() throws DAOException {
         List<Pedido> pedidos = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        Timestamp hoje = new Timestamp(calendar.getTimeInMillis());
+        LocalDate hoje = LocalDate.now();
 
         try (PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_POR_DATA_HOJE)) {
-            st.setTimestamp(1, hoje);
+            st.setDate(1, Date.valueOf(hoje));
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {

@@ -33,11 +33,13 @@
                     <input type="hidden" name="filtro" value="todos">
                     <button type="submit" class="btn btn-outline-secondary">Todos</button>
                 </form>
+                
                 <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
                     <input type="hidden" name="origin" value="visualPedidos.jsp">
                     <input type="hidden" name="filtro" value="hoje">
                     <button type="submit" class="btn btn-outline-secondary">Pedidos de Hoje</button>
-                </form>    
+                </form>  
+                
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Período</button>
                     <div class="dropdown-menu px-4 py-3">
                         <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
@@ -71,11 +73,11 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="pedido" items="${listPedido}">
+                                <c:forEach var="pedido" items="${pedidos}">
                                     
                                     <tr class="" style="background-color:
                                         <c:choose>
-                                            <c:when test="${pedido.statusPedido.status() == 'EmAberto'}">#F2E205</c:when>
+                                            <c:when test="${pedido.statusPedido.status() == 'Em Aberto'}">#F2E205</c:when>
                                             <c:when test="${pedido.statusPedido.status() == 'Recolhido'}">#CACACA</c:when>
                                             <c:when test="${pedido.statusPedido.status() == 'Aguardando Pagamento'}">#0460D9</c:when> 
                                             <c:when test="${pedido.statusPedido.status() == 'Pago'}">#FA7F08</c:when>

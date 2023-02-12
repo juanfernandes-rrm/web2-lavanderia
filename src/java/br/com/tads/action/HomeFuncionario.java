@@ -28,7 +28,7 @@ public class HomeFuncionario implements Action{
             PedidoDAO pedidoDAO = new PedidoDAO(factory.getConnection());
             List<Pedido> pedidos = pedidoDAO.buscarPorStatus(new EmAberto());
             System.out.println("Pedidos: "+pedidos.toString());
-            request.setAttribute("listPedido", pedidos);
+            request.setAttribute("pedidos", pedidos);
         } catch (Exception ex) {
             Logger.getLogger(HomeCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

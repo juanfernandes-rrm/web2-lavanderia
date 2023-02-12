@@ -26,7 +26,7 @@ public class PedidoVisual implements Action{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try(ConnectionFactory factory = new ConnectionFactory()){
             PedidoDAO pedidoDAO = new PedidoDAO(factory.getConnection());
-            request.setAttribute("listPedido", pedidoDAO.buscarTodos());
+            request.setAttribute("pedidos", pedidoDAO.buscarTodos());
         } catch (Exception ex) {
             Logger.getLogger(HomeCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

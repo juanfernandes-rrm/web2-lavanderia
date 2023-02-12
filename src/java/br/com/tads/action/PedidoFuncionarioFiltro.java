@@ -24,18 +24,20 @@ public class PedidoFuncionarioFiltro implements Action {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         String filtro = request.getParameter("filtro");
+        
         String iniDataString = request.getParameter("iniData");
         String fimDataString = request.getParameter("fimData");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date iniData = null, fimData = null;
+        
         List<Pedido> pedidos = new ArrayList<>();
         
         String origin = request.getParameter("origin");
         String returnPage;
         if ("homeFuncionario.jsp".equals(origin)) {
-        returnPage = "forward:homeFuncionario.jsp";
+            returnPage = "forward:homeFuncionario.jsp";
         } else {
-        returnPage = "forward:visualPedidos.jsp";
+            returnPage = "forward:visualPedidos.jsp";
         }
     
         if (iniDataString == null || iniDataString.trim().isEmpty()) {
@@ -49,6 +51,7 @@ public class PedidoFuncionarioFiltro implements Action {
                 iniData = new Date();
             }
         }
+        
         if (fimDataString == null || fimDataString.trim().isEmpty()) {
             // Set valor para uma data default
             fimData = new Date();
@@ -61,19 +64,19 @@ public class PedidoFuncionarioFiltro implements Action {
             }
         }
         
-            try(ConnectionFactory factory = new ConnectionFactory()){
-                Connection conn = factory.getConnection();  
-                PedidoDAO pedidoDAO = new PedidoDAO(conn);
-                switch (filtro) {
-                    case "todos" -> request.setAttribute("pedidos", pedidoDAO.buscarTodos());
-                    case "hoje" -> request.setAttribute("pedidos", pedidoDAO.buscarPedidosDeHoje());
-                    case "range" -> request.setAttribute("pedidos",pedidoDAO.buscarPedidosPorData(iniData, fimData));
-                    default -> {request.setAttribute("pedidos", pedidoDAO.buscarTodos());}   
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(ex.getMessage());
+        try(ConnectionFactory factory = new ConnectionFactory()){
+            Connection conn = factory.getConnection();  
+            PedidoDAO pedidoDAO = new PedidoDAO(conn);
+            switch (filtro) {
+                case "todos" -> request.setAttribute("pedidos", pedidoDAO.buscarTodos());
+                case "hoje" -> request.setAttribute("pedidos", pedidoDAO.buscarPedidosDeHoje());
+                case "range" -> request.setAttribute("pedidos",pedidoDAO.buscarPedidosPorData(iniData, fimData));
+                default -> {request.setAttribute("pedidos", pedidoDAO.buscarTodos());}   
             }
-            request.setAttribute("filtro", filtro);
+        } catch (Exception ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        request.setAttribute("filtro", filtro);
 
         return  returnPage;
     }

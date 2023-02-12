@@ -1,12 +1,17 @@
 package br.com.tads;
 
+import br.com.tads.connection.ConnectionFactory;
+import br.com.tads.dao.PedidoDAO;
 import br.com.tads.exceptions.DAOException;
 import br.com.tads.model.Cliente;
 import br.com.tads.model.Endereco;
 import br.com.tads.model.utils.RandomPassword;
+import java.sql.Connection;
+import java.time.LocalDate;
+import java.util.logging.Logger;
 
 public class main {
-    public static void main(String[] args) throws DAOException {
+    public static void main(String[] args) throws DAOException, Exception {
 //        Pedido pedido = new Pedido();
 //        System.out.println(pedido.getDataCriacao());
 //        System.out.println(pedido.getStatusPedido());
@@ -75,8 +80,18 @@ public class main {
 //              });
 
 
-                String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
+//                String senha = "Sua senha temporária é: "+RandomPassword.generateRandomPassword(25);
 //                SendMail.send("juanfernandesrrm@gmail.com","Lavanderia Online - Sua senha ",senha);
         
+
+        try(ConnectionFactory factory = new ConnectionFactory()){
+            Connection conn = factory.getConnection();  
+            PedidoDAO pedidoDAO = new PedidoDAO(conn);
+            System.out.println( pedidoDAO.buscarPedidosDeHoje());
+        } catch (Exception ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+
+            //System.out.println(LocalDate.now());
     }
 }

@@ -55,7 +55,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="pedido" items="${listPedido}">
+                            <c:forEach var="pedido" items="${pedidos}">
                                 <tr>
                                     <td>${pedido.numero}</td>
                                     <td><tags:localDateTime date="${pedido.dataCriacao}"/></td>
