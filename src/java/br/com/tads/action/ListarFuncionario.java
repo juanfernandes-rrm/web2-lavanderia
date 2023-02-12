@@ -24,26 +24,15 @@ public class ListarFuncionario implements Action {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ConnectionFactory factory = null;
-        try {
-            factory = new ConnectionFactory();
+        try(ConnectionFactory factory = new ConnectionFactory()){
             UsuarioDAO usuarioDAO = new UsuarioDAO(factory.getConnection());
             
             List<Funcionario> funcionarios = usuarioDAO.buscarFuncionarios();
             request.setAttribute("funcionarios", funcionarios);
         } catch (Exception ex) {
-            Logger logger = Logger.getLogger(ListarFuncionario.class.getName());
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-        } finally {
-            if (factory != null) {
-                try {
-                    factory.close();
-                } catch (Exception ex) {
-                    Logger logger = Logger.getLogger(ListarFuncionario.class.getName());
-                    logger.log(Level.SEVERE, ex.getMessage(), ex);
-                }
-            }
+            Logger.getLogger(ex.getMessage());
         }
         return "forward:manterFuncionario.jsp";
-    }    
+    }
+    
 }
