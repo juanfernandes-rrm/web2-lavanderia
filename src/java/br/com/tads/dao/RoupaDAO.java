@@ -31,6 +31,7 @@ public class RoupaDAO implements DAO<Roupa>{
     private static final String QUERY_BUSCAR_TODOS= "SELECT id, peca, valor, prazo_entrega FROM roupa";
     private static final String QUERY_BUSCAR= "SELECT id, peca, valor, prazo_entrega FROM roupa WHERE roupa.id = ?";
     private static final String QUERY_DELETE = "DELETE FROM roupa WHERE roupa.id = ?";
+    private static final String QUERY_UPDATE = "UPDATE roupa SET peca = ?, valor = ?, prazo_entrega = ? WHERE roupa.id = ?";
     
     public RoupaDAO(Connection con) throws DAOException{
         if(con== null){
@@ -98,13 +99,21 @@ public class RoupaDAO implements DAO<Roupa>{
                 }
             }
         }catch(SQLException e) {
-            throw new DAOException("Erro ao inserir pedido: "+ QUERY_INSERIR + "/ "+ roupa.toString(), e);
+            throw new DAOException("Erro ao inserir roupa: "+ QUERY_INSERIR + "/ "+ roupa.toString(), e);
         }
     }
 
     @Override
-    public void atualizar(Roupa t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void atualizar(Roupa roupa) throws DAOException {
+        try(PreparedStatement st = con.prepareStatement(QUERY_UPDATE)){
+            st.setString(1, roupa.getPeca());
+            st.setDouble(2, roupa.getValor());
+            st.setInt(3, roupa.getPrazoEntrega());
+            st.setInt(4, roupa.getId());
+            st.executeUpdate();
+        }catch(SQLException e) {
+            throw new DAOException("Erro ao atualizar roupa: "+ QUERY_UPDATE + "/ "+ roupa.toString(), e);
+        }
     }
 
     @Override
@@ -114,7 +123,7 @@ public class RoupaDAO implements DAO<Roupa>{
             st.setInt(1, roupa.getId());
             st.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(RoupaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DAOException("Erro ao atualizar roupa: "+ QUERY_DELETE + "/ "+ roupa.toString(), ex);
         }
     }
     
