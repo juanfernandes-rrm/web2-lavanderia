@@ -27,7 +27,7 @@ public class Cadastro implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cpf = request.getParameter("cpf");
+        String cpf = request.getParameter("cpf").replaceAll("[\\D]", "").trim();
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String estado = request.getParameter("estado");
@@ -35,7 +35,10 @@ public class Cadastro implements Action{
         String bairro = request.getParameter("bairro");
         String rua = request.getParameter("rua");
         String numero = request.getParameter("numero");
-        String telefone = request.getParameter("telefone");
+        String telefone = request.getParameter("telefone").replaceAll("[\\D]", "").trim();
+        
+        System.out.println(email);
+        System.out.println(telefone);
         
         System.out.println("Email: "+email);
         

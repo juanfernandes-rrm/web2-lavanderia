@@ -39,10 +39,10 @@ public class Login implements Action {
                     HttpSession session = request.getSession();
                     session.setAttribute("usuario", usuario);
                     
-                    if ((usuario instanceof Cliente) || usuario.getEmail().equals("cliente@email.com")){
+                    if ((usuario instanceof Cliente)){
                         return "redirect:controller?action=HomeCliente";
                     }
-                    if ((usuario instanceof Funcionario) || usuario.getEmail().equals("funcionario@email.com")){
+                    if ((usuario instanceof Funcionario)){
                         return "redirect:controller?action=HomeFuncionario";
                     }
                     

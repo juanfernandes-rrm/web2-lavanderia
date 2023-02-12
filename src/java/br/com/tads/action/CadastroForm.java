@@ -17,6 +17,7 @@ public class CadastroForm implements Action{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("mensagem", "Cadastrado com sucesso!");
         return "forward:cadastro.jsp";
     }
     
