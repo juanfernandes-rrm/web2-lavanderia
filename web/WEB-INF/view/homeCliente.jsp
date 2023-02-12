@@ -103,10 +103,14 @@
                                 <c:if test="${pedido.statusPedido.status() != 'Rejeitado'
                                               &&  pedido.statusPedido.status() != 'Em Análise'
                                               &&  pedido.statusPedido.status() != 'Cancelado'
-                                              &&  pedido.statusPedido.status() != 'Finalizado'}">
+                                              &&  pedido.statusPedido.status() != 'Finalizado'
+                                              &&  pedido.statusPedido.status() != 'Recolhido'
+                                              &&  pedido.statusPedido.status() != 'Aguardando Pagamento'}">
                                     <a href="controller?action=PedidoStatus&status=Cancelar&id=${pedido.numero}" class="btn btn-danger">Cancelar pedido</a>
-                                    <a href="controller?action=PedidoStatus&status=Pagar&id=${pedido.numero}" class="btn btn-primary">Pagar pedido</a> 
                                 </c:if> 
+                                <c:if test="${pedido.statusPedido.status() == 'Aguardando Pagamento'}">
+                                    <a href="controller?action=PedidoStatus&status=Pagar&id=${pedido.numero}" class="btn btn-primary">Pagar pedido</a> 
+                                </c:if>     
                             </div>
                         </div>
                     </div>
