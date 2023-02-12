@@ -7,6 +7,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<fmt:setLocale value="pt-BR" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,25 +25,23 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterRoupa">Cadastro de Itens</a></li>
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterFuncionario">Manter Funcionário</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=PedidoFuncionarioFiltro">Visualização de pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=PedidoVisual">Visualização de pedidos</a></li>
                     </ul>
                      <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
                 </div>
             </div>
-        </nav> 
-        
-        <c:set var="pedidos" value="${requestScope.pedidos}" />
+        </nav>
         
         <div class="container" style="margin-top:100px">
-         <div class="container" style="margin-bottom: 1rem">
-            <div class="btn-group align-content-center" role="group"> 
-                <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
-                    <input type="hidden" name="filtro" value="todos">
-                    <input type="hidden" name="origin" value="homeFuncionario.jsp">
-                    <button type="submit" class="btn btn-outline-secondary">Listar</button>
-                </form>
+            <div class="pb-3">
+                <div class="btn-group align-content-center" role="group"> 
+                    <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
+                        <input type="hidden" name="filtro" value="todos">
+                        <input type="hidden" name="origin" value="homeFuncionario.jsp">
+                        <button type="submit" class="btn btn-outline-secondary">Listar</button>
+                    </form>
+                </div>
             </div>
-         </div>
             <div class="card">
                 <div class="card-body"> 
                     <form action="controller?action=PedidoFuncionarioFiltro" method="post">
@@ -54,20 +55,14 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="pedidos" items="${pedidos}">
-                                    <c:if test="${pedido.statusPedido == 'EM ABERTO'}">
-                                        <tr>
-                                            <td>${pedidos.numero}</td>
-                                            <td>${pedidos.dataCriacao}</td>
-                                            <td>${pedidos.statusPedido}</td>
-                                            <td>
-                                                <input type="hidden" name="pedido" value="${pedido.numero}"/>
-                                                <input type="hidden" name="acao" value="recolhido"/>
-                                                <input type="submit" class="btn btn-primary col-5" value="Recolhido"/>
-                                            </td>
-                                        </tr> 
-                                    </c:if>
-                                </c:forEach>
+                            <c:forEach var="pedido" items="${listPedido}">
+                                <tr>
+                                    <td>${pedido.numero}</td>
+                                    <td><tags:localDateTime date="${pedido.dataCriacao}"/></td>
+                                    <td>${pedido.statusPedido.status()}</td>
+                                    <td><a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}" class="btn btn-primary">Recolher pedido</a></td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </form>    

@@ -6,6 +6,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<fmt:setLocale value="pt-BR" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,10 +55,7 @@
                         </form>
                     </div>
             </div>    
-        </div>
-
-        <c:set var="pedidos" value="${requestScope.pedidos}" />
-       
+        </div>       
         
         <div class="container" style="margin-top:20px">
             <div class="card">
@@ -71,73 +71,33 @@
                               </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="pedidos" items="${pedidos}">
-                                    <c:choose>
-                                        <c:when test="${pedidos.statusPedido == 'EM ABERTO'}">
-                                            <tr class="table-warning">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td>
-                                                    <input type="hidden" name="pedido" value="${pedido.numero}"/>
-                                                    <input type="hidden" name="acao" value="recolhido"/>
-                                                    <input type="submit" class="btn btn-primary col-5" value="Recolhido"/>
-                                                </td>
-                                            </tr> 
-                                        </c:when>
-                                        <c:when test="${pedidos.statusPedido == 'RECOLHIDO'}">
-                                            <tr class="table-secondary">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td>
-                                                    <input type="hidden" name="pedido" value="${pedido.numero}"/>
-                                                    <input type="hidden" name="acao" value="lavado"/>
-                                                    <input type="submit" class="btn btn-primary col-5" value="Lavado"/>
-                                                </td>
-                                            </tr> 
-                                        </c:when>
-                                        <c:when test="${pedidos.statusPedido == 'AGUARDANDO'}">
-                                            <tr class="table-info">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td>
-                                                    <input type="hidden" name="pedido" value="${pedido.numero}"/>
-                                                    <input type="hidden" name="acao" value="pago"/>
-                                                    <input type="submit" class="btn btn-primary col-5" value="Pago"/>
-                                                </td>
-                                            </tr> 
-                                        </c:when>
-                                        <c:when test="${pedidos.statusPedido == 'PAGO'}">
-                                            <tr style="background-color: #fecba4">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td>
-                                                    <input type="hidden" name="pedido" value="${pedido.numero}"/>
-                                                    <input type="hidden" name="acao" value="finalizar"/>
-                                                    <input type="submit" class="btn btn-primary col-5" value="Finalizar "/>
-                                                </td>
-                                            </tr>
-                                        </c:when>
-                                        <c:when test="${pedidos.statusPedido == 'FINALIZADO'}">
-                                            <tr style="background-color: #74b69a">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td></td>
-                                            </tr>
-                                        </c:when>        
-                                         <c:when test="${pedidos.statusPedido == 'CANCELADO'}">
-                                             <tr class="table-danger">
-                                                <td>${pedidos.numero}</td>
-                                                <td>${pedidos.dataCriacao}</td>
-                                                <td>${pedidos.statusPedido}</td>
-                                                <td></td>
-                                            </tr>
-                                        </c:when>     
-                                    </c:choose>>            
+                                <c:forEach var="pedido" items="${listPedido}">
+                                    
+                                    <tr class="" style="background-color:
+                                        <c:choose>
+                                            <c:when test="${pedido.statusPedido.status() == 'EmAberto'}">#F2E205</c:when>
+                                            <c:when test="${pedido.statusPedido.status() == 'Recolhido'}">#CACACA</c:when>
+                                            <c:when test="${pedido.statusPedido.status() == 'Aguardando Pagamento'}">#0460D9</c:when> 
+                                            <c:when test="${pedido.statusPedido.status() == 'Pago'}">#FA7F08</c:when>
+                                            <c:when test="${pedido.statusPedido.status() == 'Finalizado'}">#48D951</c:when> 
+                                            <c:when test="${pedido.statusPedido.status() == 'Cancelado' || pedido.statusPedido.status() == 'Rejeitado'}">#F20530</c:when>
+                                        </c:choose> 
+                                        ">    
+                                        <td>${pedido.numero}</td>
+                                        <td><tags:localDateTime date="${pedido.dataCriacao}"/></td>
+                                        <td>${pedido.statusPedido.status()}</td>
+                                        <td>
+                                            <c:if test="${pedido.statusPedido.status() == 'Em Aberto'}">
+                                                <a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Recolhido</a>
+                                            </c:if>
+                                            <c:if test="${pedido.statusPedido.status() == 'Recolhido'}">
+                                                <a href="controller?action=PedidoStatus&status=Lavar&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Lavado</a>
+                                            </c:if>
+                                            <c:if test="${pedido.statusPedido.status() == 'Pago'}">
+                                                <a href="controller?action=PedidoStatus&status=Finalizar&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Finalizado</a>
+                                            </c:if>
+                                        </td>
+                                     </tr>           
                                 </c:forEach>
                             </tbody>
                         </table>

@@ -5,39 +5,52 @@
         <group>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoStatus.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/Login.java</file>
-            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/cadastro.jsp</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/HomeFuncionario.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/resources/css/bootstrap.css</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/cadastraPedido.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Orcamento.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Peca.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/LoginForm.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/manterFuncionario.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Endereco.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/ManterRoupa.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Pedido.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/Pago.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/dao/EnderecoDAO.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/cadastraRoupa.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/dao/PedidoDAO.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/dao/UsuarioDAO.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/Cadastro.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Cliente.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/editaRoupa.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/controller/Controller.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/StatusPedido.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/Finalizado.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoUpdate.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/Cancelado.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/RoupaCadastrarForm.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/static/js/viacep-webservice.js</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/OrcamentoLista.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Funcionario.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/homeCliente.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/login.jsp</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoFuncionarioFiltro.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/main.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/Logout.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/BancoDeDados.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/homeFuncionario.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/controller/AutorizacaoFilter.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/visualPedidos.jsp</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/glassfish-web.xml</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/dao/RoupaDAO.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/resources/create-database.sql</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/cadastro.jsp</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/RoupaCadastrar.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoCadastrar.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/orcamentos.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoPesquisa.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/RoupaUpdate.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/dao/DAO.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/nbproject/build-impl.xml~</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/HomeCliente.java</file>
@@ -45,6 +58,7 @@
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoForm.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Usuario.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/EmAnalise.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/RoupaUpdateForm.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/utils/SendMail.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/exceptions/DAOException.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/Roupa.java</file>
@@ -56,8 +70,10 @@
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/index.html</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/Recolhido.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/model/status/Rejeitado.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/web/WEB-INF/view/roupa.jsp</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/PedidoFilter.java</file>
             <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/connection/ConnectionFactory.java</file>
+            <file>file:/C:/Users/juann/Documents/ufpr/DS140%20-%20WEB%20II/lavanderia/src/java/br/com/tads/action/RoupaDeletar.java</file>
         </group>
     </open-files>
 </project-private>
