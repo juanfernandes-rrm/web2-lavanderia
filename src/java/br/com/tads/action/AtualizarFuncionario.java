@@ -5,13 +5,16 @@
 package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
+import br.com.tads.dao.EnderecoDAO;
 import br.com.tads.dao.FuncionarioDAO;
+import br.com.tads.exceptions.DAOException;
 import br.com.tads.model.Endereco;
 import br.com.tads.model.Funcionario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -34,6 +37,7 @@ public class AtualizarFuncionario implements Action {
         String telefone = request.getParameter("telefone");
         String senha = request.getParameter("senha");
         String idString = request.getParameter("id");
+        String idEndereco = request.getParameter("endereco");
                 
         Endereco endereco = new Endereco(estado,cidade, bairro, rua, numero);
         Funcionario funcionario = new Funcionario(cpf, nome, email, endereco, telefone, senha);
@@ -47,15 +51,28 @@ public class AtualizarFuncionario implements Action {
                 return "forward:manterFuncionario.jsp";
             }
         }
-                
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO(factory.getConnection());
-        funcionarioDAO.atualizar(funcionario);
-            
-        } catch (Exception ex) {
-            Logger.getLogger(ex.getMessage());
+        
+        if (idEndereco != null) {
+            try {
+                int id = Integer.parseInt(idEndereco);
+                endereco.setId(id);
+            } catch (NumberFormatException e) {
+                request.setAttribute("mensagem", "Erro ao selecionar Funcionário");
+                return "forward:manterFuncionario.jsp";
+            }
         }
         
+        EnderecoDAO enderecoDAO = new EnderecoDAO(factory.getConnection());
+        enderecoDAO.atualizar(endereco);
+        
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAO(factory.getConnection());
+        funcionarioDAO.atualizar(funcionario);
         request.setAttribute("mensagem", "Funcionário atualizado");
+            
+        } catch (Exception ex) {
+            request.setAttribute("mensagem", ex.getMessage());
+        }
+        
         return "forward:manterFuncionario.jsp";
     }
 }

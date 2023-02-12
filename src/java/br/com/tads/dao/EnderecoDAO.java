@@ -20,6 +20,7 @@ public class EnderecoDAO implements DAO<Endereco>{
     private static final String QUERY_INSERIR= "INSERT INTO endereco(estado, cidade, bairro, rua, numero) VALUES (?, ?, ?, ?, ?)";
     private static final String QUERY_BUSCAR= "SELECT id, estado, cidade, bairro, rua, numero FROM endereco WHERE endereco.id = ?";
     private static final String QUERY_BUSCAR_TODOS= "SELECT id, estado, cidade, bairro, rua, numero FROM endereco";
+    private static final String QUERY_UPDATE = "UPDATE endereco SET estado = ?, cidade = ?, bairro = ?, rua = ?, numero = ? WHERE id = ?";
     
     public EnderecoDAO(Connection con) throws DAOException{
         if(con== null){
@@ -82,7 +83,19 @@ public class EnderecoDAO implements DAO<Endereco>{
 
     @Override
     public void atualizar(Endereco t) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try(PreparedStatement st = con.prepareStatement(QUERY_UPDATE)){
+            st.setString(1, t.getEstado());
+            st.setString(2, t.getCidade());
+            st.setString(3, t.getBairro());
+            st.setString(4, t.getRua());
+            st.setString(5, t.getNumero());
+            st.setInt(6, t.getId());
+            
+            st.executeUpdate();
+            
+        }catch(SQLException e) {
+            throw new DAOException("Erro ao editar usuário: "+ QUERY_UPDATE + "/ "+ t.toString(), e);
+        }
     }
 
     @Override

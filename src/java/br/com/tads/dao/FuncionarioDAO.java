@@ -5,7 +5,6 @@
 package br.com.tads.dao;
 
 import br.com.tads.exceptions.DAOException;
-import br.com.tads.model.Cliente;
 import br.com.tads.model.Endereco;
 import br.com.tads.model.Funcionario;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 /**
  *
@@ -78,8 +76,12 @@ public class FuncionarioDAO implements DAO<Funcionario>{
             
             st.executeUpdate();
             
-        }catch(SQLException e) {
-            throw new DAOException("Erro ao editar usuário: "+ QUERY_UPDATE + "/ "+ t.toString(), e);
+        }catch (SQLException e) {
+            if (e.getSQLState().equals("23505")) {
+                throw new DAOException("E-mail já existe");
+            } else {
+               throw new DAOException("Erro ao atualizar usuário: "+ t.getId(), e);
+            }
         }
     }
 

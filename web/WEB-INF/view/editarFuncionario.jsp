@@ -29,7 +29,6 @@
         <div class="container col-md-3">
             <h1>Cadastro de Funcionários</h1>
         </div>
-<!------------------------------------------------------------------------------------------------------------------------------------------------------------------->
         
     <div class="container">
         <div class="row">
@@ -90,6 +89,7 @@
                                 <input type="fone" class="form-control" id="telefone" name="telefone" value="${funcionario.telefone}" placeholder="(**) 9 ****-****">
                             </div>
                             <input type="hidden" name="senha" value="${funcionario.senha}">
+                            <input type="hidden" name="endereco" value="${funcionario.endereco.id}">
                             <input type="hidden" name="id" value="${funcionario.id}">
                             <button type="submit" class="btn btn-primary btn-block mt-3">Salvar</button>
                         
