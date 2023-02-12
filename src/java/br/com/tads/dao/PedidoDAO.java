@@ -42,7 +42,7 @@ public class PedidoDAO implements DAO<Pedido>{
     private static final String QUERY_BUSCAR_TODOS= "SELECT numero, prazo, valor_total, status_pedido, data_criacao, cliente_fk FROM pedido";
     private static final String QUERY_ATUALIZAR = "UPDATE pedido SET prazo = ?, valor_total = ?, status_pedido = ?, data_criacao = ? WHERE numero = ?";
     private static final String QUERY_ATUALIZAR_ESTADO = "UPDATE pedido SET status_pedido = ?, WHERE numero = ?";
-    private static final String QUERY_BUSCAR_POR_DATA = "SELECT * FROM pedido WHERE data_criacao BETWEEN ? AND ?";
+    private static final String QUERY_BUSCAR_POR_DATA = "SELECT * FROM pedido WHERE DATE(data_criacao) BETWEEN ? AND ?";
     private static final String QUERY_BUSCAR_POR_DATA_HOJE = "SELECT * FROM pedido WHERE DATE(data_criacao) = ?";
     
     public PedidoDAO(Connection con) throws DAOException{
@@ -357,11 +357,11 @@ public class PedidoDAO implements DAO<Pedido>{
         return null;
     }
 
-    public List<Pedido> buscarPedidosPorData(Date ini, Date fin) throws DAOException {
+    public List<Pedido> buscarPedidosPorData(LocalDate dataInicio, LocalDate dataFim) throws DAOException {
         List<Pedido> pedidos = new ArrayList<>();
         try (PreparedStatement st = con.prepareStatement(QUERY_BUSCAR_POR_DATA)) {
-            st.setTimestamp(1, new Timestamp(ini.getTime()));
-            st.setTimestamp(2, new Timestamp(fin.getTime()));
+            st.setDate(1, Date.valueOf(dataInicio));
+            st.setDate(2, Date.valueOf(dataFim));
 
             try (ResultSet rs = st.executeQuery()) {
                 while (rs.next()) {
@@ -396,10 +396,6 @@ public class PedidoDAO implements DAO<Pedido>{
             throw new DAOException("Error creating prepared statement: " + QUERY_BUSCAR_POR_DATA, e);
         }
         return null;
-    }
-
-    public Pedido buscarPedidosPorData(java.util.Date iniData, java.util.Date fimData) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

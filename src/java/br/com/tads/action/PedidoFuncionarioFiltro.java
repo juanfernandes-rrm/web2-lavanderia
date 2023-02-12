@@ -9,10 +9,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,8 +26,9 @@ public class PedidoFuncionarioFiltro implements Action {
         
         String iniDataString = request.getParameter("iniData");
         String fimDataString = request.getParameter("fimData");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        Date iniData = null, fimData = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate iniData;
+        LocalDate fimData;
         
         List<Pedido> pedidos = new ArrayList<>();
         
@@ -41,29 +41,19 @@ public class PedidoFuncionarioFiltro implements Action {
         }
     
         if (iniDataString == null || iniDataString.trim().isEmpty()) {
-            // Set valor para uma data default
-            iniData = new Date();
+            iniData = LocalDate.now();
         } else {
-            try {
-                iniData = dateFormat.parse(iniDataString);
-            } catch (ParseException e) {
-                // Set valor para uma data default
-                iniData = new Date();
-            }
+            iniData = LocalDate.parse(iniDataString, formatter);
         }
+        System.out.println("DATA INICIO: "+iniData);
         
         if (fimDataString == null || fimDataString.trim().isEmpty()) {
-            // Set valor para uma data default
-            fimData = new Date();
+            fimData = LocalDate.now();
         } else {
-            try {
-                fimData = dateFormat.parse(iniDataString);
-            } catch (ParseException e) {
-                // Set valor para uma data default
-                fimData = new Date();
-            }
+            fimData = LocalDate.parse(fimDataString, formatter);
         }
         
+        System.out.println("DATA FIM: "+fimData);
         try(ConnectionFactory factory = new ConnectionFactory()){
             Connection conn = factory.getConnection();  
             PedidoDAO pedidoDAO = new PedidoDAO(conn);

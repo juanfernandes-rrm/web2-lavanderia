@@ -8,6 +8,7 @@ import br.com.tads.model.Endereco;
 import br.com.tads.model.utils.RandomPassword;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.logging.Logger;
 
 public class main {
@@ -87,7 +88,7 @@ public class main {
         try(ConnectionFactory factory = new ConnectionFactory()){
             Connection conn = factory.getConnection();  
             PedidoDAO pedidoDAO = new PedidoDAO(conn);
-            System.out.println( pedidoDAO.buscarPedidosDeHoje());
+            System.out.println( pedidoDAO.buscarPedidosPorData(LocalDate.of(2023, Month.FEBRUARY, 10), LocalDate.of(2023, Month.FEBRUARY, 11)));
         } catch (Exception ex) {
             Logger.getLogger(ex.getMessage());
         }
