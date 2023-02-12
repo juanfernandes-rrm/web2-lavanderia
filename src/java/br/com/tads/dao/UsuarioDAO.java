@@ -7,13 +7,16 @@ package br.com.tads.dao;
 import br.com.tads.exceptions.DAOException;
 import br.com.tads.model.Cliente;
 import br.com.tads.model.Endereco;
+import br.com.tads.model.Funcionario;
 import br.com.tads.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
@@ -28,6 +31,7 @@ public class UsuarioDAO implements DAO<Usuario>{
                                                 + "WHERE usuario.email = ? AND usuario.senha = ?";
     private static final String QUERY_BUSCAR_POR_ID = "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
                                                 + "WHERE usuario.id = ?";
+    private static final String QUERY_BUSCAR_FUNCIONARIO = "SELECT * FROM usuario WHERE iscliente = 'false'";
     
     public UsuarioDAO(Connection con) throws DAOException{
         if(con== null){
@@ -134,5 +138,28 @@ public class UsuarioDAO implements DAO<Usuario>{
         EnderecoDAO enderecoDAO = new EnderecoDAO(con);
         return enderecoDAO.buscar(id);
     }
+    
+    public List<Funcionario> buscarFuncionarios() throws DAOException {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR_FUNCIONARIO)) {
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Funcionario usuario = new Funcionario();
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setEndereco(buscaEndereco(rs.getInt("endereco_fk")));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    funcionarios.add(usuario);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return funcionarios;
+    }
+
     
 }
