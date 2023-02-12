@@ -38,10 +38,14 @@ public class PedidoStatus implements Action{
                 }
                 case "Recolher" ->{
                     pedido.recolher();
+                }
+                case "Lavar" ->{
                     pedido.lavar();
                 }
                 case "Pagar" ->{
                     pedido.pagar();
+                }
+                case "Finalizar" ->{
                     pedido.finalizar();
                 }
             }

@@ -25,7 +25,7 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterRoupa">Cadastro de Itens</a></li>
                         <li class="nav-item "><a class="nav-link me-lg-3" href="controller?action=ManterFuncionario">Manter Funcionário</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=PedidoFuncionarioFiltro">Visualização de pedidos</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="controller?action=PedidoVisual">Visualização de pedidos</a></li>
                     </ul>
                      <a href="controller?action=Login" class="btn btn-primary">Sair</a> 
                 </div>
@@ -33,15 +33,15 @@
         </nav>
         
         <div class="container" style="margin-top:100px">
-         <div class="container" style="margin-bottom: 1rem">
-            <div class="btn-group align-content-center" role="group"> 
-                <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
-                    <input type="hidden" name="filtro" value="todos">
-                    <input type="hidden" name="origin" value="homeFuncionario.jsp">
-                    <button type="submit" class="btn btn-outline-secondary">Listar</button>
-                </form>
+            <div class="pb-3">
+                <div class="btn-group align-content-center" role="group"> 
+                    <form method="POST" action="controller?action=PedidoFuncionarioFiltro">
+                        <input type="hidden" name="filtro" value="todos">
+                        <input type="hidden" name="origin" value="homeFuncionario.jsp">
+                        <button type="submit" class="btn btn-outline-secondary">Listar</button>
+                    </form>
+                </div>
             </div>
-         </div>
             <div class="card">
                 <div class="card-body"> 
                     <form action="controller?action=PedidoFuncionarioFiltro" method="post">
