@@ -88,13 +88,13 @@
                                         <td>${pedido.statusPedido.status()}</td>
                                         <td>
                                             <c:if test="${pedido.statusPedido.status() == 'Em Aberto'}">
-                                                <a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}" class="btn btn-primary">Pedido Recolhido</a>
+                                                <a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Recolhido</a>
                                             </c:if>
                                             <c:if test="${pedido.statusPedido.status() == 'Recolhido'}">
-                                                <a href="controller?action=PedidoStatus&status=Lavar&id=${pedido.numero}" class="btn btn-primary">Pedido Lavado</a>
+                                                <a href="controller?action=PedidoStatus&status=Lavar&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Lavado</a>
                                             </c:if>
                                             <c:if test="${pedido.statusPedido.status() == 'Pago'}">
-                                                <a href="controller?action=PedidoStatus&status=Finalizar&id=${pedido.numero}" class="btn btn-primary">Pedido Finalizado</a>
+                                                <a href="controller?action=PedidoStatus&status=Finalizar&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Finalizado</a>
                                             </c:if>
                                         </td>
                                      </tr>           

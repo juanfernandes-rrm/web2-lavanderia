@@ -2,7 +2,7 @@ package br.com.tads.action;
 
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.PedidoDAO;
-import br.com.tads.model.Cliente;
+import br.com.tads.model.Funcionario;
 import br.com.tads.model.Pedido;
 import br.com.tads.model.Usuario;
 import jakarta.servlet.ServletException;
@@ -56,10 +56,13 @@ public class PedidoStatus implements Action{
         
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-        if (usuario instanceof Cliente){
-            return "redirect:controller?action=HomeCliente";
+        if (usuario instanceof Funcionario){
+            String origin = request.getParameter("origin");
+            if(origin != null){
+                return "redirect:controller?action="+origin;
+            }
+            return "redirect:controller?action=HomeFuncionario";
         }
-        return "redirect:controller?action=HomeFuncionario";
+        return "redirect:controller?action=HomeCliente";
     }
-    
 }
