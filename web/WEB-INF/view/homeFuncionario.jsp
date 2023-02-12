@@ -60,7 +60,11 @@
                                     <td>${pedido.numero}</td>
                                     <td><tags:localDateTime date="${pedido.dataCriacao}"/></td>
                                     <td>${pedido.statusPedido.status()}</td>
-                                    <td><a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}" class="btn btn-primary">Recolher pedido</a></td>
+                                    <td>
+                                        <c:if test="${pedido.statusPedido.status() == 'Em Aberto'}">
+                                            <a href="controller?action=PedidoStatus&status=Recolher&id=${pedido.numero}&origin=PedidoVisual" class="btn btn-primary">Pedido Recolhido</a>
+                                        </c:if>
+                                    </td>
                                 </tr>
                             </c:forEach>
                             </tbody>
