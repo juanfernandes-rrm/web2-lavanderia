@@ -26,8 +26,8 @@ public class UsuarioDAO implements DAO<Usuario>{
 
     private Connection con;
     
-    private static final String QUERY_INSERIR= "INSERT INTO usuario(cpf, nome, email, endereco_fk, telefone, senha) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String QUERY_BUSCAR= "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
+    private static final String QUERY_INSERIR= "INSERT INTO usuario(cpf, nome, email, endereco_fk, telefone, senha, isCliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String QUERY_BUSCAR= "SELECT id, cpf, nome, email, endereco_fk, telefone, senha, isCliente FROM usuario "
                                                 + "WHERE usuario.email = ? AND usuario.senha = ?";
     private static final String QUERY_BUSCAR_POR_ID = "SELECT id, cpf, nome, email, endereco_fk, telefone, senha FROM usuario "
                                                 + "WHERE usuario.id = ?";
@@ -38,6 +38,34 @@ public class UsuarioDAO implements DAO<Usuario>{
             throw new DAOException("Conexão nula ao criar RoupaDAO.");
         }
         this.con= con;
+    }
+    
+    public Usuario buscar(String login, String senha) throws DAOException {
+        Usuario usuario = new Cliente();
+        try (PreparedStatement stmt = con.prepareStatement(QUERY_BUSCAR)) {
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            try (ResultSet rs = stmt.executeQuery()) { 
+                if (rs.next()) {
+                    if(!rs.getBoolean("isCliente")){
+                        usuario = new Funcionario();
+                    }
+                    usuario.setId(rs.getInt("id"));
+                    usuario.setCpf(rs.getString("cpf"));
+                    usuario.setNome(rs.getString("nome"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setEndereco(buscaEndereco(rs.getInt("endereco_fk")));
+                    usuario.setTelefone(rs.getString("telefone"));
+                    usuario.setSenha(rs.getString("senha"));
+                    return usuario;
+                } else {
+                    System.out.println("No object found" );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     
     public Usuario buscarCliente(String login, String senha) throws DAOException {
@@ -108,6 +136,11 @@ public class UsuarioDAO implements DAO<Usuario>{
             st.setInt(4, usuario.getEndereco().getId());
             st.setString(5, usuario.getTelefone());
             st.setString(6, usuario.getSenha());
+            if(usuario instanceof Funcionario){
+                st.setBoolean(7, false);
+            }else{
+                st.setBoolean(7, true);
+            }
             
             st.executeUpdate();
             

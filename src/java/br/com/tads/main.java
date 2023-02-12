@@ -1,6 +1,8 @@
 package br.com.tads;
 
 import br.com.tads.exceptions.DAOException;
+import br.com.tads.model.Cliente;
+import br.com.tads.model.Endereco;
 import br.com.tads.model.utils.RandomPassword;
 
 public class main {
@@ -13,14 +15,6 @@ public class main {
 //        BancoDeDados.adicionarPedido(pedido);
 //        
 //        System.out.println("pedidos: "+BancoDeDados.getPedidoPorStatus(new EmAberto()));
-
-//            Cliente cliente = new Cliente("Juan", "123");
-//            cliente.setCpf("12872189971");
-//            cliente.setEmail("Juan@email.com");
-//            cliente.setTelefone("123456789");
-//            Endereco endereco = new Endereco();
-//            endereco.setCidade("Pinhais");
-//            endereco.setEstado("Paraná");
 
             
 //            EnderecoDAO enderecoDAO = new EnderecoDAO(conn);

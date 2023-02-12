@@ -4,7 +4,7 @@
  */
 package controller;
 
-import br.com.tads.model.Cliente;
+import br.com.tads.model.Funcionario;
 import br.com.tads.model.Usuario;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-
 /**
  *
  * @author juann
@@ -38,10 +37,17 @@ public class AutorizacaoFilter extends HttpFilter implements Filter {
 		
 		boolean usuarioLogado = (usuario!=null);
 		boolean actionProtegida = !(action.equals("LoginForm") || action.equals("Login") || action.equals("CadastroForm") || action.equals("Cadastro"));
-		
+		boolean actionProtegidaFuncionario = !(action.equals("HomeCliente") || action.equals("OrcamentoLista") || 
+                                                        action.equals("PedidoCadastrar") || action.equals("PedidoFilter") || action.equals("PedidoForm") ||
+                                                        action.equals("PedidoStatus"));
+                
 		if(!usuarioLogado && actionProtegida) {
-                    response.sendRedirect("controller?action=LoginForm"); 
-                    return; 
+                    if(usuario instanceof Funcionario && actionProtegidaFuncionario){
+                        response.sendRedirect("controller?action=HomeFuncionario"); 
+                        return;
+                    }
+                    response.sendRedirect("controller?action=LoginForm");
+                    return;
 		}
 		
 		chain.doFilter(request, response);

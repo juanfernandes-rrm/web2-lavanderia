@@ -7,6 +7,8 @@ package br.com.tads.action;
 import br.com.tads.connection.ConnectionFactory;
 import br.com.tads.dao.UsuarioDAO;
 import br.com.tads.exceptions.DAOException;
+import br.com.tads.model.Cliente;
+import br.com.tads.model.Funcionario;
 import java.sql.Connection;
 import br.com.tads.model.Usuario;
 import jakarta.servlet.ServletException;
@@ -31,16 +33,16 @@ public class Login implements Action {
             try(ConnectionFactory factory = new ConnectionFactory()){
                 Connection con = factory.getConnection();
                 UsuarioDAO usuarioDAO = new UsuarioDAO(con);
-                Usuario usuario = usuarioDAO.buscarCliente(login, senha);
+                Usuario usuario = usuarioDAO.buscar(login, senha);
                 
                 if(usuario != null){
                     HttpSession session = request.getSession();
                     session.setAttribute("usuario", usuario);
                     
-                    if (usuario.getEmail().equals("cliente@email.com")){
+                    if ((usuario instanceof Cliente) || usuario.getEmail().equals("cliente@email.com")){
                         return "redirect:controller?action=HomeCliente";
                     }
-                    if (usuario.getEmail().equals("funcionario@email.com")){
+                    if ((usuario instanceof Funcionario) || usuario.getEmail().equals("funcionario@email.com")){
                         return "redirect:controller?action=HomeFuncionario";
                     }
                     
